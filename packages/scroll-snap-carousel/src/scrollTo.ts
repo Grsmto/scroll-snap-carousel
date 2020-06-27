@@ -12,9 +12,9 @@ export const scrollTo = ({ root, index }: { root: any; index: number }) => {
     index: number
   ):
     | {
-        left: number;
-        top: number;
-      }
+      left: number;
+      top: number;
+    }
     | undefined => {
     const $viewport: HTMLElement = root;
     if (!$viewport) return;

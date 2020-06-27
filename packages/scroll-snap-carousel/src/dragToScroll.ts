@@ -27,7 +27,7 @@ interface Styles extends CSSStyleDeclaration {
   scrollSnapType: string;
 }
 
-export const useDragToScroll = ({
+export const dragToScroll = ({
   root,
   disabled = false,
 }: {

@@ -1,9 +1,14 @@
-import { getScrollTo } from './scrollTo';
+import { scrollTo, dragToScroll as _dragToScroll } from './';
 
 export default class ScrollSnapCarousel {
-  constructor(root: HTMLDivElement, options: {}) {
+  constructor(
+    root: HTMLDivElement,
+    { dragToScroll = true }: { dragToScroll?: boolean }
+  ) {
     this.el = root;
     this.scrollTo = (index) => scrollTo({ root, index });
+
+    if (dragToScroll) _dragToScroll({ root });
 
     // Don't re-instantiate over an existing one
     if (ScrollSnapCarousel.instances.has(this.el)) {
