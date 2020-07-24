@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { RefObject, useEffect } from 'react';
 import { dragToScroll } from 'scroll-snap-carousel';
 
 export const useDragToScroll = ({
@@ -7,4 +7,8 @@ export const useDragToScroll = ({
 }: {
   ref: RefObject<HTMLDivElement>;
   disabled?: boolean;
-}) => (index: number) => dragToScroll({ root: ref.current, index });
+}) => {
+  useEffect(() => {
+    dragToScroll({ root: ref.current });
+  }, []);
+};
