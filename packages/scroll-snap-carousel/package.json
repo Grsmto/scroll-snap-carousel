@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist",
     "start": "rollup -c -w"
   },
   "devDependencies": {

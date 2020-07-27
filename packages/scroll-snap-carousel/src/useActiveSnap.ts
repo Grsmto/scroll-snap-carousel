@@ -1,4 +1,4 @@
-import { mapItem } from "./utils";
+import { mapItem } from './utils';
 
 const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
   if (!$viewport) return { children: [], childrenInCenter: null };
@@ -43,7 +43,13 @@ const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
   return { children, childrenInCenter };
 };
 
-export const useActiveSnap = ({ root, onChange }) => {
+export const useActiveSnap = ({
+  root,
+  onChange,
+}: {
+  root: HTMLDivElement;
+  onChange: (index: number) => {};
+}) => {
   const children = root.children;
   let snapIndex = root.scrollLeft
     ? getVisibleChildren(root).childrenInCenter
@@ -63,24 +69,34 @@ export const useActiveSnap = ({ root, onChange }) => {
       } else {
         observer.unobserve(entry.target);
 
-        // if next
-        if (entry.boundingClientRect.right <= entry.rootBounds.left) {
-          children[snapIndex + 1] && observer.observe(children[snapIndex + 1]);
-        } else {
-          children[snapIndex - 1] && observer.observe(children[snapIndex - 1]);
+        if (snapIndex) {
+          if (
+            entry.rootBounds &&
+            entry.boundingClientRect.right <= entry.rootBounds.left
+          ) {
+            // if next
+            children[snapIndex + 1] &&
+              observer.observe(children[snapIndex + 1]);
+          } else {
+            children[snapIndex - 1] &&
+              observer.observe(children[snapIndex - 1]);
+          }
         }
         return;
       }
 
-      onChange && onChange(snapIndex);
-      root.dispatchEvent(
-        new CustomEvent("snap-change", {
-          detail: {
-            snapIndex,
-          },
-        })
-      );
+      if (snapIndex) {
+        onChange && onChange(snapIndex);
+        root.dispatchEvent(
+          new CustomEvent('snap-change', {
+            detail: {
+              snapIndex,
+            },
+          })
+        );
+      }
     });
   }, options);
-  observer.observe(children[snapIndex]);
+
+  if (snapIndex) observer.observe(children[snapIndex]);
 };
