@@ -10,8 +10,9 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c -w"
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "release": "yarn build && lerna publish"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",

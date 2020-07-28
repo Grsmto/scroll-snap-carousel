@@ -5,8 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "rollup -c",
-    "start": "webpack-dev-server --mode=development && rollup -c -w"
+    "start": "webpack-dev-server --mode=development"
   },
   "dependencies": {
     "react-scroll-snap-carousel": "^0.0.3"

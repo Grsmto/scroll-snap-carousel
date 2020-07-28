@@ -1,6 +1,6 @@
 import {
   dragToScroll as _dragToScroll,
-  useActiveSnap,
+  getActiveSnap,
 } from 'scroll-snap-carousel';
 
 export const carousel = (node: HTMLDivElement, options = {}) => {
@@ -9,7 +9,7 @@ export const carousel = (node: HTMLDivElement, options = {}) => {
 
   if (_options.dragToScroll) dragToScroll = _dragToScroll({ root: node });
 
-  useActiveSnap({ root: node });
+  getActiveSnap({ root: node });
 
   return {
     destroy() {

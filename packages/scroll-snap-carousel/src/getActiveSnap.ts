@@ -48,7 +48,7 @@ export const getActiveSnap = ({
   onChange,
 }: {
   root: HTMLDivElement;
-  onChange: (index: number) => {};
+  onChange?: (index: number) => {};
 }) => {
   let timeout: number | null = null;
   const children = root.children;
