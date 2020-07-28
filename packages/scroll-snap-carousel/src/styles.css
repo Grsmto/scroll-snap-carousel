@@ -1,7 +1,7 @@
 .snaplist_drag {
-  scroll-snap-type: none;
+  scroll-snap-type: none !important;
 }
 
 .snaplist_drag * {
-  user-select: none;
+  user-select: none !important;
 }
