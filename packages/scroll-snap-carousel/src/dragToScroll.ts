@@ -61,8 +61,8 @@ export const dragToScroll = ({
       // Safari resets scroll position when removing the css class, manually
       // setting the scroll property afterwards seems to fix the problem
       // without flashing
-      const currentX = root?.scrollLeft;
-      const currentY = root?.scrollTop;
+      const currentX = root.scrollLeft;
+      const currentY = root.scrollTop;
 
       root.classList.remove('snaplist_drag');
       root.scrollLeft = currentX;

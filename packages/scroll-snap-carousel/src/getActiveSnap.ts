@@ -43,13 +43,14 @@ const getVisibleChildren = ($viewport?: HTMLDivElement | null) => {
   return { children, childrenInCenter };
 };
 
-export const useActiveSnap = ({
+export const getActiveSnap = ({
   root,
   onChange,
 }: {
   root: HTMLDivElement;
   onChange: (index: number) => {};
 }) => {
+  let timeout: number | null = null;
   const children = root.children;
   let snapIndex = root.scrollLeft
     ? getVisibleChildren(root).childrenInCenter
@@ -65,11 +66,15 @@ export const useActiveSnap = ({
   let observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        snapIndex = Array.prototype.indexOf.call(children, entry.target);
+        if (
+          root.scrollLeft !== 0 &&
+          root.scrollLeft !== root.scrollWidth - root.offsetWidth
+        )
+          snapIndex = Array.prototype.indexOf.call(children, entry.target);
       } else {
         observer.unobserve(entry.target);
 
-        if (snapIndex) {
+        if (snapIndex !== null) {
           if (
             entry.rootBounds &&
             entry.boundingClientRect.right <= entry.rootBounds.left
@@ -86,17 +91,65 @@ export const useActiveSnap = ({
       }
 
       if (snapIndex) {
-        onChange && onChange(snapIndex);
-        root.dispatchEvent(
-          new CustomEvent('snap-change', {
-            detail: {
-              snapIndex,
-            },
-          })
-        );
+        triggerChange(snapIndex);
       }
     });
   }, options);
 
-  if (snapIndex) observer.observe(children[snapIndex]);
+  if (snapIndex !== null) observer.observe(children[snapIndex]);
+
+  const triggerChange = (snapIndex: number) => {
+    onChange && onChange(snapIndex);
+    root.dispatchEvent(
+      new CustomEvent('snap-change', {
+        detail: {
+          snapIndex: snapIndex,
+        },
+      })
+    );
+  };
+
+  const handleScrolling = () => {
+    if (timeout) clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      if (!root || snapIndex === null) return;
+
+      if (root.scrollLeft === 0 && snapIndex !== 0) {
+        observer.unobserve(children[snapIndex]);
+        observer.observe(children[1]);
+        snapIndex = 0;
+        triggerChange(snapIndex);
+        return;
+      }
+
+      if (root.scrollLeft !== 0 && snapIndex === 0) {
+        snapIndex = 1;
+        triggerChange(snapIndex);
+        return;
+      }
+
+      if (
+        root.scrollWidth === root.scrollLeft + root.offsetWidth &&
+        snapIndex !== children.length - 1
+      ) {
+        observer.unobserve(children[snapIndex]);
+        observer.observe(children[children.length - 2]);
+        snapIndex = children.length - 1;
+        triggerChange(snapIndex);
+        return;
+      }
+
+      if (
+        root.scrollWidth !== root.scrollLeft + root.offsetWidth &&
+        snapIndex === children.length - 1
+      ) {
+        snapIndex = children.length - 2;
+        triggerChange(snapIndex);
+        return;
+      }
+    }, 50) as any;
+  };
+
+  root.addEventListener('scroll', handleScrolling);
 };
