@@ -1,6 +1,6 @@
 {
   "name": "scroll-snap-carousel",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
