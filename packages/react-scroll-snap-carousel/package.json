@@ -10,10 +10,12 @@
     "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist",
     "start": "rollup -c -w"
   },
+  "dependencies": {
+    "scroll-snap-carousel": "^0.0.4"
+  },
   "peerDependencies": {
     "react": ">=16.8.0",
-    "react-dom": ">=16.8.0",
-    "scroll-snap-carousel": "^0.0.2"
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
