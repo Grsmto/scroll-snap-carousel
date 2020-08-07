@@ -1,6 +1,6 @@
 {
   "name": "scroll-snap-carousel-examples",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "index.js",
   "license": "MIT",
   "private": true,
@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --mode=development"
   },
   "dependencies": {
-    "react-scroll-snap-carousel": "^0.0.7"
+    "react-scroll-snap-carousel": "^0.0.8"
   },
   "devDependencies": {
     "css-loader": "^4.0.0",

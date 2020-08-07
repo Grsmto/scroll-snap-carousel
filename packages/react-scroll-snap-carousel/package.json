@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-snap-carousel",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -11,7 +11,7 @@
     "start": "rollup -c -w"
   },
   "dependencies": {
-    "scroll-snap-carousel": "^0.0.6"
+    "scroll-snap-carousel": "^0.0.7"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
