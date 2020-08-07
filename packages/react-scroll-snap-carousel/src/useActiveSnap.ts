@@ -1,14 +1,30 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, useEffect, useCallback, useState } from 'react';
 import { getActiveSnap } from 'scroll-snap-carousel';
 
 export const useActiveSnap = ({
   ref,
-  onChange,
 }: {
   ref: RefObject<HTMLDivElement>;
-  onChange: () => {};
+  snapPerPage?: number;
 }) => {
-  useEffect(() => {
-    if (ref.current) getActiveSnap({ root: ref.current, onChange });
+  const [index, setIndex] = useState(0);
+
+  const handleActiveSnapChange = useCallback((snapIndex) => {
+    setIndex(snapIndex);
   }, []);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const { destroy } = getActiveSnap({
+      root: ref.current,
+      onChange: handleActiveSnapChange,
+    });
+
+    return () => {
+      destroy();
+    };
+  }, []);
+
+  return index;
 };
