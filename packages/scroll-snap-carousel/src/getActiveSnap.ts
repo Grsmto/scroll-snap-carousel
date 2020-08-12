@@ -112,10 +112,8 @@ export const getActiveSnap = ({
   const onResizeWithDebounce = debounceHOF(onResize, 100);
 
   const init = () => {
-    const rootStyles = window.getComputedStyle(root);
     const rootWidth = root.offsetWidth;
     const rootMargin = `0px 0px 0px -${rootWidth / 2}px`;
-    const rootMarginWithPadding = `0px -${rootStyles.paddingRight} 0px -${rootStyles.paddingLeft}`;
 
     snapIndex = root.scrollLeft ? getVisibleChildren(root).childrenInCenter : 0;
     isIndexLocked = !snapIndex;
@@ -129,12 +127,16 @@ export const getActiveSnap = ({
             entry.target
           );
 
+          // entry.rootBounds is wrong on Webkit if there is a padding on the root
+          // so we use the BoundingClientRect instead
+          const rootBb = root.getBoundingClientRect();
+
           if (snapIndex !== null) {
             // If next
             if (
               entryIndex > activeSlideIndex &&
               entry.rootBounds &&
-              entry.boundingClientRect.left < entry.rootBounds.left
+              entry.boundingClientRect.left < rootBb.left + rootBb.width / 2
             ) {
               activeSlideIndex = entryIndex;
 
@@ -157,7 +159,7 @@ export const getActiveSnap = ({
             if (
               entryIndex < activeSlideIndex &&
               entry.rootBounds &&
-              entry.boundingClientRect.right > entry.rootBounds.left
+              entry.boundingClientRect.right > rootBb.left + rootBb.width / 2
             ) {
               activeSlideIndex = entryIndex;
 
@@ -191,6 +193,7 @@ export const getActiveSnap = ({
             activeSnapObserver.observe(children[1]);
             isIndexLocked = true;
             activeSlideIndex = 0;
+
             setSnapIndex(activeSlideIndex);
           }
 
@@ -201,7 +204,6 @@ export const getActiveSnap = ({
       },
       {
         root,
-        rootMargin: rootMarginWithPadding,
         threshold: [0, 0.5, 1],
       }
     );
@@ -226,7 +228,6 @@ export const getActiveSnap = ({
       },
       {
         root,
-        rootMargin: rootMarginWithPadding,
         threshold: [0, 1],
       }
     );
