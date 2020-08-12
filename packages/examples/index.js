@@ -41,7 +41,7 @@ const Examples = () => {
   }, []);
 
   React.useEffect(() => {
-    ref.current.scrollLeft = 0;
+    ref.current.scrollLeft = -9999;
   }, []);
 
   useDragToScroll({ ref });
