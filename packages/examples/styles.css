@@ -14,9 +14,10 @@ body {
   overflow-x: auto;
   flex-direction: row;
   max-width: 100%;
-  padding: 100px;
+  padding: 100px 0;
 }
 
+.carousel-container:before,
 .carousel-container:after {
   content: '';
   flex: 0 0 1px;
@@ -36,17 +37,21 @@ body {
   padding: 0 15px;
 }
 
+.slide:first-child {
+  margin-left: 100px;
+}
+
 .slide:last-child {
   margin-right: 100px;
 }
 
 @media (max-width: 640px) {
-  .carousel-container {
-    padding: 50px;
-  }
-
   .slide {
     width: 50%;
+  }
+
+  .slide:first-child {
+    margin-left: 50px;
   }
 
   .slide:last-child {
@@ -55,12 +60,16 @@ body {
 }
 
 @media (max-width: 320px) {
-  .carousel-container {
-    padding: 20px;
-  }
-
   .slide {
     width: 100%;
+  }
+
+  .slide:first-child {
+    margin-left: 20px;
+  }
+
+  .slide:last-child {
+    margin-right: 20px;
   }
 }
 
