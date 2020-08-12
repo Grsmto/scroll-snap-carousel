@@ -1,4 +1,5 @@
 import { mapItem, mapStyles } from './utils';
+import { smoothScroll } from './smoothScroll';
 
 const normalize = (
   value: number,
@@ -12,9 +13,9 @@ export const scrollTo = ({ root, index }: { root: any; index: number }) => {
     index: number
   ):
     | {
-      left: number;
-      top: number;
-    }
+        left: number;
+        top: number;
+      }
     | undefined => {
     const $viewport: HTMLElement = root;
     if (!$viewport) return;
@@ -108,11 +109,7 @@ export const scrollTo = ({ root, index }: { root: any; index: number }) => {
     const scrollTarget = getScrollFor(index);
 
     if (scrollTarget) {
-      root.scrollTo({
-        left: scrollTarget.left,
-        top: scrollTarget.top,
-        behavior: 'smooth',
-      });
+      smoothScroll(root, scrollTarget, 350);
     }
   };
 
