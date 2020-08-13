@@ -61,14 +61,12 @@ export const getActiveSnap = ({
 }: {
   root: HTMLDivElement;
   snapPerPage?: number;
-  onChange?: (index: number) => void;
+  onChange?: (snapIndex: number) => void;
 }) => {
   let activeSnapObserver: IntersectionObserver;
   let firstSlideObserver: IntersectionObserver;
   let lastSlideObserver: IntersectionObserver;
-  let snapIndex: number;
-  let activeSlideIndex: number;
-  let isIndexLocked: boolean;
+  let activeSnapIndex: number;
 
   const children = root.children;
 
@@ -76,9 +74,7 @@ export const getActiveSnap = ({
     onChange && onChange(snapIndex);
     root.dispatchEvent(
       new CustomEvent('snap-change', {
-        detail: {
-          snapIndex,
-        },
+        detail: { snapIndex },
       })
     );
   };
@@ -90,16 +86,8 @@ export const getActiveSnap = ({
     window.removeEventListener('resize', onResizeWithDebounce);
   };
 
-  const setSnapIndex = (newSnapIndex: number) => {
-    if (
-      isIndexLocked &&
-      newSnapIndex !== 0 &&
-      newSnapIndex !== children.length - 1
-    ) {
-      return;
-    }
-
-    snapIndex = newSnapIndex;
+  const setSnapIndex = (snapIndex: number) => {
+    activeSnapIndex = snapIndex;
 
     triggerChange(snapIndex);
   };
@@ -114,14 +102,20 @@ export const getActiveSnap = ({
   const init = () => {
     const rootWidth = root.offsetWidth;
     const rootMargin = `0px 0px 0px -${rootWidth / 2}px`;
+    const marginLeft = getComputedStyle(children[0]).marginLeft;
+    const marginRight = getComputedStyle(children[children.length - 1])
+      .marginRight;
+    const rootMarginEdges = `0px -${marginLeft} 0px -${marginRight}`;
 
-    snapIndex = root.scrollLeft ? getVisibleChildren(root).childrenInCenter : 0;
-    isIndexLocked = !snapIndex;
-    activeSlideIndex = snapIndex;
+    activeSnapIndex = root.scrollLeft
+      ? getVisibleChildren(root).childrenInCenter
+      : 0;
 
     activeSnapObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          // console.log('active snap: ', entry);
+
           const entryIndex = Array.prototype.indexOf.call(
             children,
             entry.target
@@ -131,22 +125,22 @@ export const getActiveSnap = ({
           // so we use the BoundingClientRect instead
           const rootBb = root.getBoundingClientRect();
 
-          if (snapIndex !== null) {
+          if (activeSnapIndex !== null) {
             // If next
             if (
-              entryIndex > activeSlideIndex &&
-              entry.rootBounds &&
+              root.scrollLeft > 0 &&
+              entry.intersectionRatio <= 0.51 &&
+              entryIndex > activeSnapIndex &&
               entry.boundingClientRect.left < rootBb.left + rootBb.width / 2
             ) {
-              activeSlideIndex = entryIndex;
-
+              // console.log('next');
               activeSnapObserver.unobserve(entry.target);
               children[entryIndex - 2] &&
                 activeSnapObserver.unobserve(children[entryIndex - 2]);
 
               if (children[entryIndex + 1]) {
                 activeSnapObserver.observe(children[entryIndex + 1]);
-                setSnapIndex(snapIndex + 1);
+                setSnapIndex(entryIndex);
               }
 
               if (children[entryIndex - 1])
@@ -157,19 +151,19 @@ export const getActiveSnap = ({
 
             // If previous
             if (
-              entryIndex < activeSlideIndex &&
+              entryIndex < activeSnapIndex &&
+              entry.intersectionRatio >= 0.49 &&
               entry.rootBounds &&
               entry.boundingClientRect.right > rootBb.left + rootBb.width / 2
             ) {
-              activeSlideIndex = entryIndex;
-
+              // console.log('previous');
               activeSnapObserver.unobserve(entry.target);
               children[entryIndex + 2] &&
                 activeSnapObserver.unobserve(children[entryIndex + 2]);
 
               if (children[entryIndex - 1]) {
                 activeSnapObserver.observe(children[entryIndex - 1]);
-                setSnapIndex(snapIndex - 1);
+                setSnapIndex(entryIndex);
               }
 
               if (children[entryIndex + 1])
@@ -188,22 +182,22 @@ export const getActiveSnap = ({
     firstSlideObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio === 1) {
-            activeSnapObserver.unobserve(children[activeSlideIndex]);
+          // console.log('first ', entry);
+          if (
+            entry.isIntersecting &&
+            entry.intersectionRatio === 1 &&
+            activeSnapIndex !== 0
+          ) {
+            activeSnapObserver.unobserve(children[activeSnapIndex]);
             activeSnapObserver.observe(children[1]);
-            isIndexLocked = true;
-            activeSlideIndex = 0;
 
-            setSnapIndex(activeSlideIndex);
-          }
-
-          if (entry.isIntersecting && entry.intersectionRatio < 1) {
-            isIndexLocked = false;
+            setSnapIndex(0);
           }
         });
       },
       {
         root,
+        rootMargin: rootMarginEdges,
         threshold: [0, 0.5, 1],
       }
     );
@@ -211,32 +205,30 @@ export const getActiveSnap = ({
     lastSlideObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!snapIndex) return;
+          if (!activeSnapIndex) return;
 
           if (entry.isIntersecting && entry.intersectionRatio === 1) {
-            activeSnapObserver.unobserve(children[activeSlideIndex]);
+            activeSnapObserver.unobserve(children[activeSnapIndex]);
             activeSnapObserver.observe(children[children.length - 2]);
-            isIndexLocked = true;
-            activeSlideIndex = snapIndex + 1;
-            setSnapIndex(activeSlideIndex);
-          }
 
-          if (entry.isIntersecting && entry.intersectionRatio < 1) {
-            isIndexLocked = false;
+            setSnapIndex(activeSnapIndex + 1);
           }
         });
       },
       {
         root,
+        rootMargin: rootMarginEdges,
         threshold: [0, 1],
       }
     );
 
     // Set intersection observers
-    if (children[snapIndex - 1])
-      activeSnapObserver.observe(children[snapIndex - 1]);
+    if (children[activeSnapIndex - 1])
+      activeSnapObserver.observe(children[activeSnapIndex - 1]);
     activeSnapObserver.observe(
-      children[snapIndex + 1] ? children[snapIndex + 1] : children[snapIndex]
+      children[activeSnapIndex + 1]
+        ? children[activeSnapIndex + 1]
+        : children[activeSnapIndex]
     );
     firstSlideObserver.observe(children[0]);
     lastSlideObserver.observe(children[children.length - 1]);

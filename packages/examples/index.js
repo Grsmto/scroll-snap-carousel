@@ -7,9 +7,21 @@ import {
 } from 'react-scroll-snap-carousel';
 import 'scroll-snap-carousel/dist/styles.css';
 
+const getPageIndex = (index, length) => {
+  switch (index) {
+    case 0:
+    case 1:
+      return 0;
+    case length - 1:
+      return length - 3;
+    default:
+      return index - 1;
+  }
+};
+
 const Examples = () => {
   const ref = React.useRef();
-  const [slidesPerPage, setSlidesPerPage] = React.useState(2);
+  const [pages, setPages] = React.useState(2);
 
   let slidesLength = 10;
   let slides = [];
@@ -18,26 +30,24 @@ const Examples = () => {
     slides.push(`Slide ${index + 1}`);
   }
 
-  // const pagesLength = slidesLength - slidesPerPage + 1;
-
   React.useEffect(() => {
     const lg = window.matchMedia('(min-width: 641px)');
     const md = window.matchMedia('(max-width: 640px)');
     const sm = window.matchMedia('(max-width: 320px)');
 
     lg.addListener(() => {
-      setSlidesPerPage(8);
+      setPages(8);
     });
     md.addListener(() => {
-      setSlidesPerPage(10);
+      setPages(10);
     });
     sm.addListener(() => {
-      setSlidesPerPage(10);
+      setPages(10);
     });
 
-    if (lg.matches) setSlidesPerPage(8);
-    if (md.matches) setSlidesPerPage(10);
-    if (sm.matches) setSlidesPerPage(10);
+    if (lg.matches) setPages(8);
+    if (md.matches) setPages(10);
+    if (sm.matches) setPages(10);
   }, []);
 
   React.useEffect(() => {
@@ -46,9 +56,18 @@ const Examples = () => {
 
   useDragToScroll({ ref });
 
-  const index = useActiveSnap({ ref, snapPerPage: slidesPerPage });
+  const scrollTo = useScroll({ ref });
+  const index = useActiveSnap({ ref });
 
-  console.log(index);
+  const pageIndex = getPageIndex(index, slidesLength);
+
+  const handlePrevious = React.useCallback(() => {
+    scrollTo(index - 1);
+  }, [index]);
+
+  const handleNext = React.useCallback(() => {
+    scrollTo(index + 1);
+  }, [index]);
 
   return (
     <div>
@@ -60,12 +79,22 @@ const Examples = () => {
         ))}
       </div>
       <div className="carousel-indicator">
-        {Array.from(Array(slidesPerPage)).map((_, i) => (
+        {Array.from(Array(pages)).map((_, i) => (
           <div
             key={i}
-            className={`carousel-indicator__dot ${index === i ? 'active' : ''}`}
+            className={`carousel-indicator__dot ${
+              pageIndex === i ? 'active' : ''
+            }`}
           />
         ))}
+      </div>
+      <div className="">
+        <button onClick={handlePrevious} disabled={pageIndex === 0}>
+          Previous
+        </button>
+        <button onClick={handleNext} disabled={pageIndex === pages.length - 1}>
+          Next
+        </button>
       </div>
     </div>
   );
