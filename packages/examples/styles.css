@@ -25,7 +25,7 @@ body {
 }
 
 .slide {
-  width: 33.33%;
+  width: calc(33.33% - ((2 * 100px) / 3));
   flex-shrink: 0;
   height: 100%;
   scroll-snap-align: center;
