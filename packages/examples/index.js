@@ -8,7 +8,7 @@ import {
 import 'scroll-snap-carousel/dist/styles.css';
 
 const getPageIndex = (index, length, offset) => {
-  return Math.max(0, index - offset);
+  return Math.min(Math.max(0, index - offset), length - offset - 1);
 };
 
 const Examples = () => {

@@ -206,7 +206,7 @@ export const getActiveSnap = ({
         entries.forEach((entry) => {
           if (!activeSnapIndex) return;
 
-          if (entry.isIntersecting && entry.intersectionRatio === 1) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.99) {
             activeSnapObserver.unobserve(children[activeSnapIndex]);
             activeSnapObserver.observe(children[children.length - 2]);
 
@@ -217,7 +217,7 @@ export const getActiveSnap = ({
       {
         root,
         rootMargin: rootMarginEdges,
-        threshold: [0, 1],
+        threshold: [0, 0.99],
       }
     );
 

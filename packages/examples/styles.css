@@ -25,7 +25,7 @@ body {
 }
 
 .slide {
-  width: calc(33.33% - ((2 * 100px) / 3));
+  width: calc(33.33% - ((2 * 10vw) / 3));
   flex-shrink: 0;
   height: 100%;
   scroll-snap-align: center;
@@ -38,24 +38,24 @@ body {
 }
 
 .slide:first-child {
-  margin-left: 100px;
+  margin-left: 10vw;
 }
 
 .slide:last-child {
-  margin-right: 100px;
+  margin-right: 10vw;
 }
 
 @media (max-width: 640px) {
   .slide {
-    width: 50%;
+    width: calc(50% - ((2 * 5vw) / 2));
   }
 
   .slide:first-child {
-    margin-left: 50px;
+    margin-left: 5vw;
   }
 
   .slide:last-child {
-    margin-right: 50px;
+    margin-right: 5vw;
   }
 }
 
