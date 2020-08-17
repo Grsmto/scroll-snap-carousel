@@ -7,21 +7,13 @@ import {
 } from 'react-scroll-snap-carousel';
 import 'scroll-snap-carousel/dist/styles.css';
 
-const getPageIndex = (index, length) => {
-  switch (index) {
-    case 0:
-    case 1:
-      return 0;
-    case length - 1:
-      return length - 3;
-    default:
-      return index - 1;
-  }
+const getPageIndex = (index, length, offset) => {
+  return Math.max(0, index - offset);
 };
 
 const Examples = () => {
   const ref = React.useRef();
-  const [pages, setPages] = React.useState(2);
+  const [offsetItems, setOffsetItems] = React.useState(0);
 
   let slidesLength = 10;
   let slides = [];
@@ -36,30 +28,35 @@ const Examples = () => {
     const sm = window.matchMedia('(max-width: 320px)');
 
     lg.addListener(() => {
-      setPages(8);
+      setOffsetItems(1);
     });
     md.addListener(() => {
-      setPages(10);
+      setOffsetItems(0);
     });
     sm.addListener(() => {
-      setPages(10);
+      setOffsetItems(0);
     });
 
-    if (lg.matches) setPages(8);
-    if (md.matches) setPages(10);
-    if (sm.matches) setPages(10);
+    if (lg.matches) setOffsetItems(1);
+    if (md.matches) setOffsetItems(0);
+    if (sm.matches) setOffsetItems(0);
   }, []);
 
   React.useEffect(() => {
-    ref.current.scrollLeft = -9999;
+    ref.current.scrollLeft = 0;
   }, []);
 
   useDragToScroll({ ref });
 
   const scrollTo = useScroll({ ref });
   const index = useActiveSnap({ ref });
+  const pages = slides.slice(offsetItems * 2, slides.length);
 
-  const pageIndex = getPageIndex(index, slidesLength);
+  const pageIndex = getPageIndex(index, slides.length, offsetItems);
+
+  console.log('index: ', index);
+  console.log('pageIndex: ', pageIndex);
+  console.log('offsetItems: ', offsetItems);
 
   const handlePrevious = React.useCallback(() => {
     scrollTo(index - 1);
@@ -79,7 +76,7 @@ const Examples = () => {
         ))}
       </div>
       <div className="carousel-indicator">
-        {Array.from(Array(pages)).map((_, i) => (
+        {pages.map((_, i) => (
           <div
             key={i}
             className={`carousel-indicator__dot ${

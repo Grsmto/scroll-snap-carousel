@@ -128,7 +128,6 @@ export const getActiveSnap = ({
           if (activeSnapIndex !== null) {
             // If next
             if (
-              root.scrollLeft > 0 &&
               entry.intersectionRatio <= 0.51 &&
               entryIndex > activeSnapIndex &&
               entry.boundingClientRect.left < rootBb.left + rootBb.width / 2
