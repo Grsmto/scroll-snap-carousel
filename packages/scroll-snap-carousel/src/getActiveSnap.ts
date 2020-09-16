@@ -150,7 +150,7 @@ export const getActiveSnap = ({
 
             // If previous
             if (
-              entryIndex < activeSnapIndex &&
+              entryIndex <= activeSnapIndex &&
               entry.intersectionRatio >= 0.49 &&
               entry.rootBounds &&
               entry.boundingClientRect.right > rootBb.left + rootBb.width / 2
