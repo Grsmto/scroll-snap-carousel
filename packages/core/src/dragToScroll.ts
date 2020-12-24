@@ -116,6 +116,7 @@ export const dragToScroll = ({
     if (!isDragging) return;
 
     root.addEventListener('scroll', handleScrolling);
+    handleScrolling();
 
     if (originalScrollSnapType === 'none') return;
 
