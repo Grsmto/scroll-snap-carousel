@@ -1,0 +1,12 @@
+snap-carousel-slides {
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &:before,
+  &:after {
+    content: '';
+    flex: 0 0 1px;
+    height: 100%;
+  }
+}
