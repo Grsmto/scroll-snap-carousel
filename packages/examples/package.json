@@ -1,6 +1,6 @@
 {
   "name": "@snap-carousel/examples",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "index.js",
   "license": "MIT",
   "private": true,
@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --mode=development"
   },
   "dependencies": {
-    "@snap-carousel/react": "^0.0.13"
+    "@snap-carousel/react": "^0.0.14"
   },
   "devDependencies": {
     "css-loader": "^4.0.0",
