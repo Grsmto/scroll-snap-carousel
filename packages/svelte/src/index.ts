@@ -1,7 +1,7 @@
 import {
   dragToScroll as _dragToScroll,
   getActiveSnap,
-} from 'scroll-snap-carousel';
+} from '@snap-carousel/core';
 
 export const carousel = (node: HTMLDivElement, options = {}) => {
   const _options = { dragToScroll: true, ...options };
