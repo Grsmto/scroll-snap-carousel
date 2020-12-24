@@ -1,5 +1,5 @@
 import { RefObject, useEffect } from 'react';
-import { dragToScroll } from 'scroll-snap-carousel';
+import { dragToScroll } from '@snap-carousel/core';
 
 export const useDragToScroll = ({
   ref,

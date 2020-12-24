@@ -1,5 +1,5 @@
 export const mergeStyles = (...classnames: (string | null | undefined)[]) =>
-  classnames.filter(Boolean).join(" ");
+  classnames.filter(Boolean).join(' ');
 
 interface Styles extends CSSStyleDeclaration {
   scrollSnapAlign?: string;
@@ -9,28 +9,28 @@ interface Styles extends CSSStyleDeclaration {
   scrollPaddingBottom?: string;
 }
 const extractStyleProperty = (property: keyof Styles, styles: Styles): any =>
-  styles[property] || "";
+  styles[property] || '';
 
 export const mapStyles = ($item: HTMLElement | Element) => {
   const styles = window.getComputedStyle($item) as Styles;
 
   return {
-    paddingLeft: parseInt(extractStyleProperty("paddingLeft", styles)),
-    paddingRight: parseInt(extractStyleProperty("paddingRight", styles)),
-    paddingTop: parseInt(extractStyleProperty("paddingTop", styles)),
-    paddingBottom: parseInt(extractStyleProperty("paddingBottom", styles)),
-    snapAlign: extractStyleProperty("scrollSnapAlign", styles).split(" ")[0],
+    paddingLeft: parseInt(extractStyleProperty('paddingLeft', styles)),
+    paddingRight: parseInt(extractStyleProperty('paddingRight', styles)),
+    paddingTop: parseInt(extractStyleProperty('paddingTop', styles)),
+    paddingBottom: parseInt(extractStyleProperty('paddingBottom', styles)),
+    snapAlign: extractStyleProperty('scrollSnapAlign', styles).split(' ')[0],
     scrollPaddingLeft: parseInt(
-      extractStyleProperty("scrollPaddingLeft", styles)
+      extractStyleProperty('scrollPaddingLeft', styles)
     ),
     scrollPaddingRight: parseInt(
-      extractStyleProperty("scrollPaddingRight", styles)
+      extractStyleProperty('scrollPaddingRight', styles)
     ),
     scrollPaddingTop: parseInt(
-      extractStyleProperty("scrollPaddingTop", styles)
+      extractStyleProperty('scrollPaddingTop', styles)
     ),
     scrollPaddingBottom: parseInt(
-      extractStyleProperty("scrollPaddingBottom", styles)
+      extractStyleProperty('scrollPaddingBottom', styles)
     ),
   };
 };
@@ -73,13 +73,13 @@ export const mapItem = ({
 
 export const isTouchDevice = () =>
   !!(
-    typeof window !== "undefined" &&
-    ("ontouchstart" in window ||
+    typeof window !== 'undefined' &&
+    ('ontouchstart' in window ||
       (window.DocumentTouch &&
-        typeof document !== "undefined" &&
+        typeof document !== 'undefined' &&
         document instanceof window.DocumentTouch))
   ) ||
   !!(
-    typeof navigator !== "undefined" &&
+    typeof navigator !== 'undefined' &&
     (navigator.maxTouchPoints || navigator.msMaxTouchPoints)
   );

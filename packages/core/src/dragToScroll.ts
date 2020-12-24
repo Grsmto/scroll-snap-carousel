@@ -161,11 +161,11 @@ export const dragToScroll = ({
 
     const children = root.children;
 
-    elementPositionsX = Array.from(children).map((element: HTMLElement) =>
-      getElementPositionX(root, element)
+    elementPositionsX = Array.from(children).map((element) =>
+      getElementPositionX(root, element as HTMLElement)
     );
-    elementPositionsY = Array.from(children).map((element: HTMLElement) =>
-      getElementPositionY(root, element)
+    elementPositionsY = Array.from(children).map((element) =>
+      getElementPositionY(root, element as HTMLElement)
     );
 
     registerEventListeners();
