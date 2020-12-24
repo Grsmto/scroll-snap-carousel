@@ -5,8 +5,8 @@ import {
   useScroll,
   useActiveSnap,
 } from '@snap-carousel/react';
-// import '@snap-carousel/core/dist/styles.css';
 import '@snap-carousel/core';
+import '@snap-carousel/core/dist/styles.css';
 
 const getPageIndex = (index, length, offset) => {
   return Math.min(Math.max(0, index - offset), length - offset - 1);
