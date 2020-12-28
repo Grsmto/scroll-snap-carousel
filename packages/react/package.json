@@ -11,7 +11,7 @@
     "start": "rollup -c -w"
   },
   "dependencies": {
-    "@snap-carousel/core": "^0.0.13"
+    "@snap-carousel/core": "^0.0.14"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
