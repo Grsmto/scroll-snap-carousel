@@ -1410,6 +1410,18 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@snap-carousel/core@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@snap-carousel/core/-/core-0.0.13.tgz#a8f00d0ec4613184bdd59557acb77c4f85532392"
+  integrity sha512-U3VXtAwR+ntPX/iJyqDGKbexW5YO7AsbeDvXCS6kw0jcEzq+iI6xn/LHdc/39Deol3w7UuY8U9qdzl3DJsyl+g==
+
+"@snap-carousel/react@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@snap-carousel/react/-/react-0.0.14.tgz#115cf158e0eeee745dc76577ac68e260fedc2ec1"
+  integrity sha512-mK2qWCw0uo+RIC8nhPoLHK7RbLAi24SyP/tsykYATnECd3my6LZE11ct/krga/AIIvbGBMsVt702kXqx4r8lbQ==
+  dependencies:
+    "@snap-carousel/core" "^0.0.13"
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
