@@ -1,3 +1,29 @@
+# (Sat Jan 02 2021)
+
+#### ⚠️ Pushed to `master`
+
+- yarn lock update (adrien.denat@gmail.com)
+- chore: update yarn.lock (adrien.denat@gmail.com)
+- chore: remove useless fields in package.json (adrien.denat@gmail.com)
+- `@snap-carousel/core@0.0.15`, `@snap-carousel/examples@0.0.14`
+  - fix(core): remove normalizing of values that blocks carousel from going to first/last slide in certain conditions (adrien.denat@gmail.com)
+- `@snap-carousel/react@0.0.16`
+  - update react dep version (adrien.denat@gmail.com)
+- `@snap-carousel/core@0.0.15`, `@snap-carousel/react@0.0.16`
+  - bump versions (adrien.denat@gmail.com)
+- `@snap-carousel/examples@0.0.14`, `@snap-carousel/react@0.0.16`
+  - fix(react): fix not building (adrien.denat@gmail.com)
+- `@snap-carousel/core@0.0.15`
+  - fix(core): fix a bug where snaplist_drag class is never removed (adrien.denat@gmail.com)
+- `@snap-carousel/core@0.0.15`, `@snap-carousel/examples@0.0.14`, `@snap-carousel/react@0.0.16`
+  - chore: rename package to @snap-carousel (adrien.denat@gmail.com)
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # (Thu Dec 24 2020)
 
 #### ⚠️ Pushed to `master`
