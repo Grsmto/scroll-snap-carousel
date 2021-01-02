@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --mode=development"
   },
   "dependencies": {
-    "@snap-carousel/react": "^0.0.14"
+    "@snap-carousel/react": "^0.0.15",
+    "@snap-carousel/core": "^0.0.14"
   },
   "devDependencies": {
     "css-loader": "^4.0.0",

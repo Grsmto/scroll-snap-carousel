@@ -1,13 +1,6 @@
 import { mapItem, mapStyles } from './utils';
 import { smoothScroll } from './smoothScroll';
 
-const normalize = (
-  value: number,
-  { min, max }: { min: number; max: number }
-) => {
-  return Math.min(max, Math.max(min, value));
-};
-
 export const scrollTo = ({ root, index }: { root: any; index: number }) => {
   const getScrollFor = (
     index: number
@@ -96,12 +89,9 @@ export const scrollTo = ({ root, index }: { root: any; index: number }) => {
         break;
     }
 
-    const maxLeftScroll = viewport.scrollWidth - viewport.width;
-    const maxTopScroll = viewport.scrollHeight - viewport.height;
-
     return {
-      left: normalize(target.left, { min: 0, max: maxLeftScroll }),
-      top: normalize(target.top, { min: 0, max: maxTopScroll }),
+      left: target.left,
+      top: target.top,
     };
   };
 
