@@ -1,6 +1,6 @@
 # Scroll Snap Carousel
 
-Scroll Snap Carousel is a helper to enhance the native [CSS Scroll Snap](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scroll_Snap) experience. If you ever wanted to use CSS Scroll Snap to create a carousel but where missing basic features like "active dots" indicator and drag scroll, this is for you!
+Scroll Snap Carousel is a helper to enhance the native [CSS Scroll Snap](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scroll_Snap) experience. If you ever wanted to use CSS Scroll Snap to create a carousel but were missing basic features like "active dots" indicator and drag scroll, this is for you!
 
 ## :warning: This project is a WIP!
 
