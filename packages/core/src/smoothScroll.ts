@@ -70,19 +70,7 @@ const smoothScrollPolyfill = ({
 };
 
 const hasNativeSmoothScroll = () => {
-  let supports = false;
-  const fakeScrollToOptions = {
-    top: 0,
-    get behavior() {
-      supports = true;
-      return 'smooth';
-    },
-  };
-  try {
-    const div = document.createElement('div');
-    div.scrollTo(fakeScrollToOptions as any);
-  } catch (err) {} // eslint-disable-line no-empty
-  return supports;
+  return 'scrollBehavior' in document.documentElement.style;
 };
 
 export const smoothScroll = (
