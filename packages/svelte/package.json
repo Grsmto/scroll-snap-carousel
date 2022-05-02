@@ -1,6 +1,6 @@
 {
   "name": "@snap-carousel/svelte",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -12,7 +12,7 @@
     "start": "rollup -c -w"
   },
   "dependencies": {
-    "@snap-carousel/core": "^0.0.16"
+    "@snap-carousel/core": "^0.0.17"
   },
   "peerDependencies": {
     "svelte": ">=3.0.0"
