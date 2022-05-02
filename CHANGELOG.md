@@ -1,3 +1,38 @@
+# (Mon May 02 2022)
+
+#### ⚠️ Pushed to `master`
+
+- Update README.md ([@Grsmto](https://github.com/Grsmto))
+- yarn lock update ([@Grsmto](https://github.com/Grsmto))
+- chore: update yarn.lock ([@Grsmto](https://github.com/Grsmto))
+- chore: remove useless fields in package.json ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/svelte@0.0.14`
+  - feat(svelte): export scrollTo function for external usage ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/core@0.0.17`
+  - chore(core): rework smoothScroll detection support ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/svelte@0.0.14`
+  - fix(svelte): rework Svelte package ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/core@0.0.17`
+  - fix(core): fix calculation for active snap ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/core@0.0.17`, `@snap-carousel/examples@0.0.16`
+  - fix(core): remove normalizing of values that blocks carousel from going to first/last slide in certain conditions ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/react@0.0.18`
+  - update react dep version ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/core@0.0.17`, `@snap-carousel/react@0.0.18`
+  - bump versions ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/examples@0.0.16`, `@snap-carousel/react@0.0.18`
+  - fix(react): fix not building ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/core@0.0.17`
+  - fix(core): fix a bug where snaplist_drag class is never removed ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/core@0.0.17`, `@snap-carousel/examples@0.0.16`, `@snap-carousel/react@0.0.18`
+  - chore: rename package to @snap-carousel ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # (Mon Dec 13 2021)
 
 #### ⚠️ Pushed to `master`
