@@ -181,10 +181,9 @@ export const getActiveSnap = ({
     firstSlideObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // console.log('first ', entry);
           if (
             entry.isIntersecting &&
-            entry.intersectionRatio === 1 &&
+            entry.intersectionRatio >= 0.99 &&
             activeSnapIndex !== 0
           ) {
             activeSnapObserver.unobserve(children[activeSnapIndex]);
@@ -197,20 +196,21 @@ export const getActiveSnap = ({
       {
         root,
         rootMargin: rootMarginEdges,
-        threshold: [0, 0.5, 1],
+        threshold: [0, 0.99],
       }
     );
 
     lastSlideObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!activeSnapIndex) return;
-
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.99) {
+          if (
+            entry.isIntersecting &&
+            entry.intersectionRatio >= 0.99 &&
+            activeSnapIndex !== children.length - 1
+          ) {
             activeSnapObserver.unobserve(children[activeSnapIndex]);
             activeSnapObserver.observe(children[children.length - 2]);
-
-            setSnapIndex(activeSnapIndex + 1);
+            setSnapIndex(children.length - 1);
           }
         });
       },

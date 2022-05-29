@@ -1,4 +1,4 @@
-import { utils } from 'scroll-snap-carousel';
+import { utils } from '@snap-carousel/core';
 
 export const { isTouchDevice } = utils;
 

@@ -1,8 +1,12 @@
 {
-  "name": "scroll-snap-carousel",
+  "name": "snap-carousel",
+  "private": true,
   "version": "0.0.1",
   "license": "MIT",
-  "private": true,
+  "engines": {
+    "node": ">=12",
+    "yarn": ">=1"
+  },
   "workspaces": [
     "packages/*"
   ],
@@ -17,7 +21,7 @@
     "@rollup/plugin-typescript": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
-    "auto": "^9.53.1",
+    "auto": "^10.36.5",
     "babel-loader": "^8.1.0",
     "eslint": "^7.5.0",
     "eslint-utils": "^2.1.0",
@@ -29,6 +33,6 @@
     "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-serve": "^1.0.3",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.3"
   }
 }

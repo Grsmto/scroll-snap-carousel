@@ -1,4 +1,4 @@
-import ScrollSnapCarousel from 'scroll-snap-carousel';
+import ScrollSnapCarousel from '@snap-carousel/core';
 
 const scrollSnapCarousel = new ScrollSnapCarousel(node);
 

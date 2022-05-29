@@ -4,8 +4,9 @@ import {
   useDragToScroll,
   useScroll,
   useActiveSnap,
-} from 'react-scroll-snap-carousel';
-import 'scroll-snap-carousel/dist/styles.css';
+} from '@snap-carousel/react';
+import '@snap-carousel/core';
+import '@snap-carousel/core/dist/styles.css';
 
 const getPageIndex = (index, length, offset) => {
   return Math.min(Math.max(0, index - offset), length - offset - 1);
@@ -67,31 +68,49 @@ const Examples = () => {
   }, [index]);
 
   return (
-    <div>
-      <div ref={ref} className="carousel-container">
-        {slides.map((slide) => (
-          <div className="slide" key={slide}>
-            {slide}
-          </div>
-        ))}
+    <div className="examples">
+      <div className="react-example">
+        <div ref={ref} className="carousel-container">
+          {slides.map((slide) => (
+            <div className="slide" key={slide}>
+              {slide}
+            </div>
+          ))}
+        </div>
+        <div className="carousel-indicator">
+          {pages.map((_, i) => (
+            <div
+              key={i}
+              className={`carousel-indicator__dot ${
+                pageIndex === i ? 'active' : ''
+              }`}
+            />
+          ))}
+        </div>
+        <div className="">
+          <button onClick={handlePrevious} disabled={pageIndex === 0}>
+            Previous
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={pageIndex === pages.length - 1}
+          >
+            Next
+          </button>
+        </div>
       </div>
-      <div className="carousel-indicator">
-        {pages.map((_, i) => (
-          <div
-            key={i}
-            className={`carousel-indicator__dot ${
-              pageIndex === i ? 'active' : ''
-            }`}
-          />
-        ))}
-      </div>
-      <div className="">
-        <button onClick={handlePrevious} disabled={pageIndex === 0}>
-          Previous
-        </button>
-        <button onClick={handleNext} disabled={pageIndex === pages.length - 1}>
-          Next
-        </button>
+      <div className="html-example">
+        <snap-carousel>
+          <snap-carousel-slides>
+            <snap-carousel-slide>slide 1</snap-carousel-slide>
+            <snap-carousel-slide>slide 2</snap-carousel-slide>
+          </snap-carousel-slides>
+          <snap-carousel-indicator />
+          <snap-carousel-navigation>
+            <button>Previous</button>
+            <button>Next</button>
+          </snap-carousel-navigation>
+        </snap-carousel>
       </div>
     </div>
   );

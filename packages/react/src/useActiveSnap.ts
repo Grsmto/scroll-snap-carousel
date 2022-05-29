@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useCallback, useState } from 'react';
-import { getActiveSnap } from 'scroll-snap-carousel';
+import { getActiveSnap } from '@snap-carousel/core';
 
 export const useActiveSnap = ({
   ref,

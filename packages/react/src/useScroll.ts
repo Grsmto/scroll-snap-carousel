@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { scrollTo } from 'scroll-snap-carousel';
+import { scrollTo } from '@snap-carousel/core';
 
 export const useScroll = ({ ref }: { ref: RefObject<HTMLDivElement> }) => (
   index: number
