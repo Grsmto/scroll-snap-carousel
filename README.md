@@ -48,6 +48,8 @@ const Component = () => {
 }
 ```
 
+For more advanced usage see [the example](https://github.com/Grsmto/scroll-snap-carousel/blob/master/packages/examples/index.js).
+
 ## :warning: This project is a WIP!
 
 Scroll Snap Carousel is a carousel based on **native CSS Scroll Snap**.
