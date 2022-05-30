@@ -2,6 +2,52 @@
 
 Scroll Snap Carousel is a helper to enhance the native [CSS Scroll Snap](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scroll_Snap) experience. If you ever wanted to use CSS Scroll Snap to create a carousel but were missing basic features like "active dots" indicator and drag scroll, this is for you!
 
+### Installation
+
+**- Via npm**
+`npm install @snap-carousel/core --save` or for React `npm install @snap-carousel/react --save`
+
+**- Via Yarn**
+`yarn add @snap-carousel/core` or for React `yarn add @snap-carousel/react`
+
+### Usage
+
+```
+<style>
+  .carousel-container {
+    scroll-snap-type: x mandatory;
+    overflow-y: hidden;
+    overflow-x: auto;
+    ...
+    display: flex;
+    flex-direction: row;
+  }
+</style>
+```
+
+```js
+import {
+  useDragToScroll,
+  useScroll,
+  useActiveSnap,
+} from '@snap-carousel/react';
+import '@snap-carousel/core/dist/styles.css';
+
+const Component = () => {
+  useDragToScroll({ ref });
+
+  return (
+    <div ref={ref} className="carousel-container">
+      {slides.map((slide) => (
+        <div className="slide" key={slide}>
+          {slide}
+        </div>
+      ))}
+    </div>
+  )
+}
+```
+
 ## :warning: This project is a WIP!
 
 Scroll Snap Carousel is a carousel based on **native CSS Scroll Snap**.
