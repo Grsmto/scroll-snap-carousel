@@ -25,6 +25,8 @@ Scroll Snap Carousel is a helper to enhance the native [CSS Scroll Snap](https:/
 </style>
 ```
 
+#### With React
+
 ```js
 import {
   useDragToScroll,
