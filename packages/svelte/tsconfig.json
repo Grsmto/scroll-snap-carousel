@@ -3,9 +3,13 @@
   "compilerOptions": {
     "removeComments": false,
     "sourceMap": true,
-    "inlineSources": true
+    "inlineSources": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "."
   },
   "include": ["src/**/*.ts"],
+  "exclude": ["dist"],
   "compileOnSave": false,
   "buildOnSave": false
 }

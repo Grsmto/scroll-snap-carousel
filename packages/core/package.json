@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist && cp src/styles.css dist/styles.css",
+    "build": "rollup -c && cp src/styles.css dist/styles.css",
     "start": "cp src/styles.css dist/styles.css && rollup -c -w"
   },
   "devDependencies": {

@@ -14,9 +14,8 @@
     "lib": ["dom", "es2017"],
     "moduleResolution": "node",
     "module": "es6",
-    "target": "es2017",
-    "jsx": "react"
+    "target": "es2017"
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
-  "exclude": ["docs/**", "node_modules/**"]
+  "exclude": ["node_modules/**"]
 }
