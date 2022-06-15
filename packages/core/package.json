@@ -6,6 +6,7 @@
   "jsnext:main": "dist/index.es.js",
   "license": "MIT",
   "private": false,
+  "repository": "https://github.com/Grsmto/scroll-snap-carousel",
   "publishConfig": {
     "access": "public"
   },
