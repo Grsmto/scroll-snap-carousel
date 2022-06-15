@@ -1,6 +1,6 @@
 {
   "name": "@snap-carousel/react",
-  "version": "0.0.18",
+  "version": "0.0.19-next.0",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -14,7 +14,7 @@
     "start": "rollup -c -w"
   },
   "dependencies": {
-    "@snap-carousel/core": "^0.0.17"
+    "@snap-carousel/core": "^0.0.18-next.0"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
