@@ -13,7 +13,8 @@
   "scripts": {
     "build": "lerna run build",
     "test": "lerna run test",
-    "release": "auto shipit"
+    "release": "auto shipit",
+    "start": "lerna run --parallel start"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
