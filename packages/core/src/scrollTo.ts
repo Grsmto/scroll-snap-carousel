@@ -1,7 +1,15 @@
 import { mapItem, mapStyles } from './utils';
 import { smoothScroll } from './smoothScroll';
 
-export const scrollTo = ({ root, index }: { root: any; index: number }) => {
+export const scrollTo = ({
+  root,
+  index,
+  duration = 350,
+}: {
+  root: any;
+  index: number;
+  duration?: number;
+}) => {
   const getScrollFor = (
     index: number
   ):
@@ -99,9 +107,13 @@ export const scrollTo = ({ root, index }: { root: any; index: number }) => {
     const scrollTarget = getScrollFor(index);
 
     if (scrollTarget) {
-      smoothScroll(root, scrollTarget, 350);
+      return smoothScroll(root, scrollTarget, duration);
     }
+
+    return;
   };
 
-  return goTo(index);
+  const cancel = goTo(index);
+
+  return { cancel, index };
 };

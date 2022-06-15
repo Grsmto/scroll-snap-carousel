@@ -64,7 +64,6 @@ export const dragToScroll = ({
       const currentX = root.scrollLeft;
       const currentY = root.scrollTop;
 
-      root.classList.remove('snaplist_drag');
       root.scrollLeft = currentX;
       root.scrollTop = currentY;
     }, 50) as any;
