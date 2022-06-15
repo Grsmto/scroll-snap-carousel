@@ -19,7 +19,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@babel/preset-react": "^7.10.4",
-    "@rollup/plugin-typescript": "^4.1.2",
+    "@rollup/plugin-typescript": "^8.3.2",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
     "auto": "^10.36.5",
@@ -34,6 +34,6 @@
     "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-serve": "^1.0.3",
     "tslib": "^2.0.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.7.3"
   }
 }
