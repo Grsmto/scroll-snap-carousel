@@ -6,6 +6,9 @@
   "jsnext:main": "dist/index.es.js",
   "license": "MIT",
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rollup -c && cp ../core/dist/styles.css dist/styles.css",
     "start": "rollup -c -w"
