@@ -1,4 +1,4 @@
-.snaplist_drag {
+.snaplist_drag, .scrolling {
   scroll-snap-type: none !important;
 }
 

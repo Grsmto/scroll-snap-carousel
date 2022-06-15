@@ -18,8 +18,11 @@ const smoothScrollPolyfill = ({
   let interrupt = false;
 
   const cleanup = () => {
-    node.removeEventListener('wheel', cancel); // eslint-disable-line @typescript-eslint/no-use-before-define
-    node.removeEventListener('touchstart', cancel); // eslint-disable-line @typescript-eslint/no-use-before-define
+    node.removeEventListener('wheel', cancel);
+    node.removeEventListener('touchstart', cancel);
+    node.removeEventListener('mousedown', cancel);
+
+    node.classList.remove('scrolling');
   };
 
   const step = () => {
@@ -53,6 +56,7 @@ const smoothScrollPolyfill = ({
       Math.abs(scrollTarget.top - nextScrollTop) <= 1
         ? scrollTarget.top
         : nextScrollTop;
+
     requestAnimationFrame(step);
   };
 
@@ -63,14 +67,13 @@ const smoothScrollPolyfill = ({
 
   node.addEventListener('wheel', cancel, { passive: true });
   node.addEventListener('touchstart', cancel, { passive: true });
+  node.addEventListener('mousedown', cancel, { passive: true });
+
+  node.classList.add('scrolling');
 
   step();
 
   return cancel;
-};
-
-const hasNativeSmoothScroll = () => {
-  return 'scrollBehavior' in document.documentElement.style;
 };
 
 export const smoothScroll = (
@@ -79,13 +82,5 @@ export const smoothScroll = (
   duration: number
 ) => {
   if (!node) return;
-  if (hasNativeSmoothScroll()) {
-    return node.scrollTo({
-      left: scrollTarget.left,
-      top: scrollTarget.top,
-      behavior: 'smooth',
-    });
-  } else {
-    return smoothScrollPolyfill({ node, scrollTarget, duration });
-  }
+  return smoothScrollPolyfill({ node, scrollTarget, duration });
 };

@@ -2,6 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "esnext",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "."
   },
-  "include": ["src", "types/jsx.d.ts"]
+  "include": ["src/*"],
+  "exclude": ["dist"],
 }

@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist",
+    "build": "rollup -c && cp ../core/dist/styles.css dist/styles.css",
     "start": "rollup -c -w"
   },
   "dependencies": {
@@ -20,14 +20,14 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
-    "@rollup/plugin-typescript": "^4.1.2",
+    "@rollup/plugin-typescript": "^8.3.2",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^3.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "rollup": "^2.16.1",
+    "rollup": "^2.74.1",
     "rollup-plugin-peer-deps-external": "^2.2.2"
   }
 }

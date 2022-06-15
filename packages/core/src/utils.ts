@@ -1,18 +1,13 @@
 export const mergeStyles = (...classnames: (string | null | undefined)[]) =>
   classnames.filter(Boolean).join(' ');
 
-interface Styles extends CSSStyleDeclaration {
-  scrollSnapAlign?: string;
-  scrollPaddingLeft?: string;
-  scrollPaddingRight?: string;
-  scrollPaddingTop?: string;
-  scrollPaddingBottom?: string;
-}
-const extractStyleProperty = (property: keyof Styles, styles: Styles): any =>
-  styles[property] || '';
+const extractStyleProperty = (
+  property: keyof CSSStyleDeclaration,
+  styles: CSSStyleDeclaration
+): any => styles[property] || '';
 
 export const mapStyles = ($item: HTMLElement | Element) => {
-  const styles = window.getComputedStyle($item) as Styles;
+  const styles = window.getComputedStyle($item) as CSSStyleDeclaration;
 
   return {
     paddingLeft: parseInt(extractStyleProperty('paddingLeft', styles)),
@@ -80,6 +75,6 @@ export const isTouchDevice = () =>
         document instanceof window.DocumentTouch))
   ) ||
   !!(
-    typeof navigator !== 'undefined' &&
+    typeof navigator !== 'undefined' && // @ts-expect-error// @ts-expect-error
     (navigator.maxTouchPoints || navigator.msMaxTouchPoints)
   );
