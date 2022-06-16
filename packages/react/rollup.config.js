@@ -21,5 +21,10 @@ export default {
       sourcemap: true,
     },
   ],
-  plugins: [external(), resolve(), typescript(), commonjs()],
+  plugins: [
+    external(),
+    resolve(),
+    typescript({ tsconfig: './tsconfig.json' }),
+    commonjs(),
+  ],
 };
