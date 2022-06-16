@@ -57,6 +57,8 @@ export const dragToScroll = ({
 
       root.removeEventListener('scroll', handleScrolling);
 
+      root.classList.remove('scrolling');
+
       setIsDragging(false);
       // Safari resets scroll position when removing the css class, manually
       // setting the scroll property afterwards seems to fix the problem
@@ -94,7 +96,7 @@ export const dragToScroll = ({
         originalScrollSnapType = snapListStyles.scrollSnapType.toString();
       }
     }
-    root.classList.add('snaplist_drag');
+    root.classList.add('scrolling');
 
     const x = event.pageX - root.offsetLeft;
     const displaceX = x - startX;

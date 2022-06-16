@@ -1,8 +1,8 @@
-.snaplist_drag, .scrolling {
+.scrolling {
   scroll-snap-type: none !important;
 }
 
-.snaplist_drag * {
+.scrolling * {
   user-select: none !important;
   pointer-events: none;
 }
