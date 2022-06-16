@@ -2,5 +2,8 @@
   "version": "independent",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "ignoreChanges": ["**/demo/**", "**/*.md"]
+  "ignoreChanges": ["**/demo/**", "**/*.md"],
+  "publish": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }

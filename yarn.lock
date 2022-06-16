@@ -1436,6 +1436,18 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@snap-carousel/core@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@snap-carousel/core/-/core-0.0.17.tgz#0d188f875f8a3d0051d280c99c3731c3e09a01e8"
+  integrity sha512-cTMHlxiW5U/fU0ZrA/cIvuWm+yeGkCE54gWk/nUqfaRJyGdU6YXYeaR+mM9MsojoWaqoaED6CRiCQBO578KQfw==
+
+"@snap-carousel/react@^0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@snap-carousel/react/-/react-0.0.18.tgz#27716dbabef0550afad167fc49fcaf7eddbd06ba"
+  integrity sha512-IAAwhywYXlqaMwEYsJKeRiVzhhiXajabBgfHj0nodErm/QZOai6iMH216a3a5t20vmQIa6Ta87VwSR6RfBaaYA==
+  dependencies:
+    "@snap-carousel/core" "^0.0.17"
+
 "@types/command-line-args@^5.0.0":
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/@types/command-line-args/-/command-line-args-5.2.0.tgz#adbb77980a1cc376bb208e3f4142e907410430f6"
