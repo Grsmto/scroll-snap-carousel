@@ -10,7 +10,16 @@ const getElementPositionX = (
   element: HTMLElement
 ): number => {
   const item = mapItem({ element, viewport });
-  return item.left - (viewport.offsetWidth / 2 - item.width / 2);
+
+  switch (item.snapAlign) {
+    case 'start':
+      return item.left;
+    case 'end':
+      return item.left - (viewport.offsetWidth / 2 - item.width / 2);
+    case 'center':
+    default:
+      return item.left - (viewport.offsetWidth / 2 - item.width / 2);
+  }
 };
 
 const getElementPositionY = (
