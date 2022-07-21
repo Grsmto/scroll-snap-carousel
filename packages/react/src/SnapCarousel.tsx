@@ -1,6 +1,7 @@
 import React, { ElementType, useRef } from 'react';
 
 import { useDragToScroll } from './useDragToScroll';
+import { useScroll } from './useScroll';
 
 const useMergedRefs = (refs: React.DependencyList) =>
   React.useCallback((current) => {
@@ -13,26 +14,31 @@ const useMergedRefs = (refs: React.DependencyList) =>
     });
   }, refs);
 
-export type PolymorphicRef<
-  C extends React.ElementType
-> = React.ComponentPropsWithRef<C>['ref'];
+export type PolymorphicRef<C extends React.ElementType> =
+  React.ComponentPropsWithRef<C>['ref'];
 
 type Props<T extends ElementType> = {
   children?: React.ReactNode;
   tag?: T;
+  index?: number;
 };
 
 export const SnapCarousel = React.forwardRef(
   <T extends ElementType = 'div'>(
-    { children, tag, ...otherProps }: Props<T>,
+    { children, tag, index, ...otherProps }: Props<T>,
     ref?: PolymorphicRef<T>
   ) => {
     const RootTag = tag || 'div';
     const elRef = useRef<any>(null);
     const contentNodeRef = useRef<HTMLDivElement>(null);
     const mergedRef = useMergedRefs([elRef, ref]);
+    const scrollTo = useScroll({ ref: elRef });
 
     useDragToScroll({ ref: elRef });
+
+    React.useEffect(() => {
+      if (index) scrollTo(index);
+    }, [index]);
 
     return (
       <RootTag
@@ -40,9 +46,7 @@ export const SnapCarousel = React.forwardRef(
         ref={mergedRef}
         {...otherProps}
       >
-        <div className="snap-carousel-inner" ref={contentNodeRef}>
-          {children}
-        </div>
+        {children}
       </RootTag>
     );
   }

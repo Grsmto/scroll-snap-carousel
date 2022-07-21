@@ -1,0 +1,23 @@
+.scrolling {
+  scroll-snap-type: none !important;
+}
+
+.scrolling * {
+  user-select: none !important;
+  pointer-events: none;
+}
+
+.snap-carousel-container {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow-y: hidden;
+  overflow-x: auto;
+  flex-direction: row;
+  max-width: 100%;
+}
+
+.snap-carousel-inner {
+  display: flex;
+}
