@@ -78,3 +78,14 @@ export const isTouchDevice = () =>
     typeof navigator !== 'undefined' && // @ts-expect-error// @ts-expect-error
     (navigator.maxTouchPoints || navigator.msMaxTouchPoints)
   );
+
+export const debounceHOF = (callback: () => void, ms: number) => {
+  let timeout: any;
+  return () => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      timeout = null;
+      callback();
+    }, ms);
+  };
+};

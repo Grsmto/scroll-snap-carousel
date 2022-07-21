@@ -50,7 +50,9 @@ export const dragToScroll = ({
   let isDragging = false;
   const setIsDragging = (value: boolean) => (isDragging = value);
 
+  let initialTargetIndex = 0;
   let isDown = false;
+  let velocity = 0;
   let startX = 0;
   let startY = 0;
   let slideX = 0;
@@ -62,7 +64,7 @@ export const dragToScroll = ({
     if (timeout) clearTimeout(timeout);
 
     timeout = setTimeout(() => {
-      if (!root) return;
+      if (!root || isDown) return;
 
       root.removeEventListener('scroll', handleScrolling);
 
@@ -88,11 +90,20 @@ export const dragToScroll = ({
     slideX = root.scrollLeft;
     startY = event.pageY - root.offsetTop;
     slideY = root.scrollTop;
+
+    const scrollTargetX = getClosest(elementPositionsX, slideX);
+    const scrollTargetY = getClosest(elementPositionsY, slideY);
+    initialTargetIndex =
+      scrollTargetX > 0
+        ? elementPositionsX.indexOf(scrollTargetX)
+        : elementPositionsY.indexOf(scrollTargetY);
   };
 
   const handleMouseMove = (event: MouseEvent) => {
     if (!root) return;
     if (!isDown) return;
+
+    velocity = event.movementX;
 
     const distanceMoved = Math.abs(startX - (event.pageX - root.offsetLeft));
 
@@ -134,13 +145,22 @@ export const dragToScroll = ({
     const dragEndPositionY = root.scrollTop;
     const scrollTargetX = getClosest(elementPositionsX, dragEndPositionX);
     const scrollTargetY = getClosest(elementPositionsY, dragEndPositionY);
-
     const targetIndex =
       scrollTargetX > 0
         ? elementPositionsX.indexOf(scrollTargetX)
         : elementPositionsY.indexOf(scrollTargetY);
 
-    scrollTo({ root, index: targetIndex });
+    if (
+      targetIndex === initialTargetIndex &&
+      (velocity > 10 || velocity < -10)
+    ) {
+      const targetIndex =
+        velocity > 10 ? initialTargetIndex - 1 : initialTargetIndex + 1;
+
+      scrollTo({ root, index: targetIndex });
+    } else {
+      scrollTo({ root, index: targetIndex });
+    }
   };
 
   const handleClick = (event: MouseEvent) => {
