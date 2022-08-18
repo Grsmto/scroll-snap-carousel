@@ -9,7 +9,7 @@ export const useActiveSnap = ({
 }) => {
   const [index, setIndex] = useState(0);
 
-  const handleActiveSnapChange = useCallback((snapIndex) => {
+  const handleActiveSnapChange = useCallback((snapIndex: number) => {
     setIndex(snapIndex);
   }, []);
 
