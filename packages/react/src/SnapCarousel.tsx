@@ -1,11 +1,13 @@
-import React, { ElementType, useRef } from 'react';
+import React, { useRef } from 'react';
+import type { ElementType } from 'react';
 
+import { useActiveSnap } from './useActiveSnap';
 import { useDragToScroll } from './useDragToScroll';
 import { useScroll } from './useScroll';
 
 const useMergedRefs = (refs: React.DependencyList) =>
-  React.useCallback((current) => {
-    refs.forEach((ref) => {
+  React.useCallback((current: any) => {
+    refs.forEach((ref: any) => {
       if (typeof ref === 'function') {
         ref(current);
       } else if (ref && !Object.isFrozen(ref)) {
@@ -21,24 +23,29 @@ type Props<T extends ElementType> = {
   children?: React.ReactNode;
   tag?: T;
   index?: number;
+  onIndexChange?: (index: number) => void;
 };
 
 export const SnapCarousel = React.forwardRef(
   <T extends ElementType = 'div'>(
-    { children, tag, index, ...otherProps }: Props<T>,
+    { children, tag, index, onIndexChange, ...otherProps }: Props<T>,
     ref?: PolymorphicRef<T>
   ) => {
     const RootTag = tag || 'div';
     const elRef = useRef<any>(null);
-    const contentNodeRef = useRef<HTMLDivElement>(null);
     const mergedRef = useMergedRefs([elRef, ref]);
     const scrollTo = useScroll({ ref: elRef });
+    const activeIndex = useActiveSnap({ ref: elRef });
 
     useDragToScroll({ ref: elRef });
 
     React.useEffect(() => {
-      if (index) scrollTo(index);
+      if (typeof index !== 'undefined') scrollTo(index);
     }, [index]);
+
+    React.useEffect(() => {
+      onIndexChange && onIndexChange(activeIndex);
+    }, [activeIndex, onIndexChange]);
 
     return (
       <RootTag
