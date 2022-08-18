@@ -31,8 +31,6 @@ export const getActiveSnap = ({
 
   const setSnapIndex = (snapIndex: number) => {
     activeSnapIndex = snapIndex;
-
-    triggerChange(snapIndex);
   };
 
   const onResize = () => {
@@ -52,8 +50,9 @@ export const getActiveSnap = ({
       // } else if (root.scrollLeft === root.scrollWidth - root.offsetWidth) {
       //   setSnapIndex(children.length - 1);
       // }
+      triggerChange(activeSnapIndex);
       isScrolling = false;
-    }, 50) as any;
+    }, 350) as any;
   };
 
   const init = () => {
