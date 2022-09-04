@@ -13,7 +13,7 @@ const Carousel = ({ className }) => {
   }
 
   return (
-    <div className={className}>
+    <div className={`SnapCarousel-story ${className}`}>
       <SnapCarousel>
         {slides.map((slide) => (
           <div className="slide" key={slide}>

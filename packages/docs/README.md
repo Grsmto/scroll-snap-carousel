@@ -1,172 +1,173 @@
-# Remix Indie Stack
+# Astro Starter Kit: Docs Site
 
-![The Remix Indie Stack](https://repository-images.githubusercontent.com/465928257/a241fa49-bd4d-485a-a2a5-5cb8e4ee0abf)
-
-Learn more about [Remix Stacks](https://remix.run/stacks).
-
-```
-npx create-remix --template remix-run/indie-stack
+```bash
+npm init astro -- --template docs
 ```
 
-## What's in the stack
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/docs)
 
-- [Fly app deployment](https://fly.io) with [Docker](https://www.docker.com/)
-- Production-ready [SQLite Database](https://sqlite.org)
-- Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
-- [GitHub Actions](https://github.com/features/actions) for deploy on merge to production and staging environments
-- Email/Password Authentication with [cookie-based sessions](https://remix.run/docs/en/v1/api/remix#createcookiesessionstorage)
-- Database ORM with [Prisma](https://prisma.io)
-- Styling with [Tailwind](https://tailwindcss.com/)
-- End-to-end testing with [Cypress](https://cypress.io)
-- Local third party request mocking with [MSW](https://mswjs.io)
-- Unit testing with [Vitest](https://vitest.dev) and [Testing Library](https://testing-library.com)
-- Code formatting with [Prettier](https://prettier.io)
-- Linting with [ESLint](https://eslint.org)
-- Static Types with [TypeScript](https://typescriptlang.org)
+![docs](https://user-images.githubusercontent.com/4677417/186189283-0831b9ab-d6b9-485d-8955-3057e532ab31.png)
 
-Not a fan of bits of the stack? Fork it, change it, and use `npx create-remix --template your/repo`! Make it your own.
 
-## Quickstart
+## Features
 
-Click this button to create a [Gitpod](https://gitpod.io) workspace with the project set up and Fly pre-installed
+- ✅ **Full Markdown support**
+- ✅ **Responsive mobile-friendly design**
+- ✅ **Sidebar navigation**
+- ✅ **Search (powered by Algolia)**
+- ✅ **Multi-language i18n**
+- ✅ **Automatic table of contents**
+- ✅ **Automatic list of contributors**
+- ✅ (and, best of all) **dark mode**
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+## Commands Cheatsheet
 
-## Development
+All commands are run from the root of the project, from a terminal:
 
-- Initial setup: _If you just generated this project, this step has been done for you._
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `npm install`          | Installs dependencies                            |
+| `npm run dev`          | Starts local dev server at `localhost:3000`      |
+| `npm run build`        | Build your production site to `./dist/`          |
+| `npm run preview`      | Preview your build locally, before deploying     |
+| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro --help` | Get help using the Astro CLI                     |
 
-  ```sh
-  npm run setup
-  ```
+To deploy your site to production, check out our [Deploy an Astro Website](https://docs.astro.build/guides/deploy) guide.
 
-- Start dev server:
+## New to Astro?
 
-  ```sh
-  npm run dev
-  ```
+Welcome! Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
-This starts your app in development mode, rebuilding assets on file changes.
+## Customize This Theme
 
-The database seed script creates a new user with some data you can use to get started:
+### Site metadata
 
-- Email: `rachel@remix.run`
-- Password: `racheliscool`
+`src/config.ts` contains several data objects that describe metadata about your site like title, description, default language, and Open Graph details. You can customize these to match your project.
 
-### Relevant code:
+### CSS styling
 
-This is a pretty simple note-taking app, but it's a good example of how you can build a full stack app with Prisma and Remix. The main functionality is creating users, logging in and out, and creating and deleting notes.
+The theme's look and feel is controlled by a few key variables that you can customize yourself. You'll find them in the `public/theme.css` CSS file.
 
-- creating users, and logging in and out [./app/models/user.server.ts](./app/models/user.server.ts)
-- user sessions, and verifying them [./app/session.server.ts](./app/session.server.ts)
-- creating, and deleting notes [./app/models/note.server.ts](./app/models/note.server.ts)
+If you've never worked with CSS variables before, give [MDN's guide on CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) a quick read.
 
-## Deployment
+This theme uses a "cool blue" accent color by default. To customize this for your project, change the `--theme-accent` variable to whatever color you'd like:
 
-This Remix Stack comes with two GitHub Actions that handle automatically deploying your app to production and staging environments.
+```diff
+/* public/theme.css */
+:root {
+  color-scheme: light;
+-  --theme-accent: hsla(var(--color-blue), 1);
++  --theme-accent: hsla(var(--color-red), 1);   /* or: hsla(#FF0000, 1); */
+```
 
-Prior to your first deployment, you'll need to do a few things:
+## Page metadata
 
-- [Install Fly](https://fly.io/docs/getting-started/installing-flyctl/)
+Astro uses frontmatter in Markdown pages to choose layouts and pass properties to those layouts. If you are using the default layout, you can customize the page in many different ways to optimize SEO and other things. For example, you can use the `title` and `description` properties to set the document title, meta title, meta description, and Open Graph description.
 
-- Sign up and log in to Fly
+```markdown
+---
+title: Example title
+description: Really cool docs example that uses Astro
+layout: ../../layouts/MainLayout.astro
+---
 
-  ```sh
-  fly auth signup
-  ```
+# Page content...
+```
 
-  > **Note:** If you have more than one Fly account, ensure that you are signed into the same account in the Fly CLI as you are in the browser. In your terminal, run `fly auth whoami` and ensure the email matches the Fly account signed into the browser.
+For more SEO related properties, look at `src/components/HeadSEO.astro`
 
-- Create two apps on Fly, one for staging and one for production:
+### Sidebar navigation
 
-  ```sh
-  fly create blog-tutorial-7f51
-  fly create blog-tutorial-7f51-staging
-  ```
-
-  - Initialize Git.
-
-  ```sh
-  git init
-  ```
-
-- Create a new [GitHub Repository](https://repo.new), and then add it as the remote for your project. **Do not push your app yet!**
-
-  ```sh
-  git remote add origin <ORIGIN_URL>
-  ```
-
-- Add a `FLY_API_TOKEN` to your GitHub repo. To do this, go to your user settings on Fly and create a new [token](https://web.fly.io/user/personal_access_tokens/new), then add it to [your repo secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) with the name `FLY_API_TOKEN`.
-
-- Add a `SESSION_SECRET` to your fly app secrets, to do this you can run the following commands:
-
-  ```sh
-  fly secrets set SESSION_SECRET=$(openssl rand -hex 32) --app blog-tutorial-7f51
-  fly secrets set SESSION_SECRET=$(openssl rand -hex 32) --app blog-tutorial-7f51-staging
-  ```
-
-  If you don't have openssl installed, you can also use [1password](https://1password.com/password-generator/) to generate a random secret, just replace `$(openssl rand -hex 32)` with the generated secret.
-
-- Create a persistent volume for the sqlite database for both your staging and production environments. Run the following:
-
-  ```sh
-  fly volumes create data --size 1 --app blog-tutorial-7f51
-  fly volumes create data --size 1 --app blog-tutorial-7f51-staging
-  ```
-
-Now that everything is set up you can commit and push your changes to your repo. Every commit to your `main` branch will trigger a deployment to your production environment, and every commit to your `dev` branch will trigger a deployment to your staging environment.
-
-### Connecting to your database
-
-The sqlite database lives at `/data/sqlite.db` in your deployed application. You can connect to the live database by running `fly ssh console -C database-cli`.
-
-### Getting Help with Deployment
-
-If you run into any issues deploying to Fly, make sure you've followed all of the steps above and if you have, then post as many details about your deployment (including your app name) to [the Fly support community](https://community.fly.io). They're normally pretty responsive over there and hopefully can help resolve any of your deployment issues and questions.
-
-## GitHub Actions
-
-We use GitHub Actions for continuous integration and deployment. Anything that gets into the `main` branch will be deployed to production after running tests/build/etc. Anything in the `dev` branch will be deployed to staging.
-
-## Testing
-
-### Cypress
-
-We use Cypress for our End-to-End tests in this project. You'll find those in the `cypress` directory. As you make changes, add to an existing file or create a new file in the `cypress/e2e` directory to test your changes.
-
-We use [`@testing-library/cypress`](https://testing-library.com/cypress) for selecting elements on the page semantically.
-
-To run these tests in development, run `npm run test:e2e:dev` which will start the dev server for the app as well as the Cypress client. Make sure the database is running in docker as described above.
-
-We have a utility for testing authenticated features without having to go through the login flow:
+The sidebar navigation is controlled by the `SIDEBAR` variable in your `src/config.ts` file. You can customize the sidebar by modifying this object. A default, starter navigation has already been created for you.
 
 ```ts
-cy.login();
-// you are now logged in as a new user
+export const SIDEBAR = {
+  en: [
+    { text: "Section Header", header: true },
+    { text: "Introduction", link: "en/introduction" },
+    { text: "Page 2", link: "en/page-2" },
+    { text: "Page 3", link: "en/page-3" },
+
+    { text: "Another Section", header: true },
+    { text: "Page 4", link: "en/page-4" },
+  ],
+};
 ```
 
-We also have a utility to auto-delete the user at the end of your test. Just make sure to add this in each test file:
+Note the top-level `en` key: This is needed for multi-language support. You can change it to whatever language you'd like, or add new languages as you go. More details on this below.
 
-```ts
-afterEach(() => {
-  cy.cleanupUser();
-});
+### Multiple Languages support
+
+The Astro docs template supports multiple langauges out of the box. The default theme only shows `en` documentation, but you can enable multi-language support features by adding a second language to your project.
+
+To add a new language to your project, you'll want to extend the current `src/pages/[lang]/...` layout:
+
+```diff
+ 📂 src/pages
+ ┣ 📂 en
+ ┃ ┣ 📜 page-1.md
+ ┃ ┣ 📜 page-2.md
+ ┃ ┣ 📜 page-3.astro
++ ┣ 📂 es
++ ┃ ┣ 📜 page-1.md
++ ┃ ┣ 📜 page-2.md
++ ┃ ┣ 📜 page-3.astro
 ```
 
-That way, we can keep your local db clean and keep your tests isolated from one another.
+You'll also need to add the new language name to the `KNOWN_LANGUAGES` map in your `src/config.ts` file. This will enable your new language switcher in the site header.
 
-### Vitest
+```diff
+// src/config.ts
+export const KNOWN_LANGUAGES = {
+  English: 'en',
++  Spanish: 'es',
+};
+```
 
-For lower level tests of utilities and individual components, we use `vitest`. We have DOM-specific assertion helpers via [`@testing-library/jest-dom`](https://testing-library.com/jest-dom).
+Last step: you'll need to add a new entry to your sidebar, to create the table of contents for that language. While duplicating every page might not sound ideal to everyone, this extra control allows you to create entirely custom content for every language.
 
-### Type Checking
+> Make sure the sidebar `link` value points to the correct language!
 
-This project uses TypeScript. It's recommended to get TypeScript set up for your editor to get a really great in-editor experience with type checking and auto-complete. To run type checking across the whole project, run `npm run typecheck`.
+```diff
+// src/config.ts
+export const SIDEBAR = {
+  en: [
+    { text: 'Section Header', header: true, },
+    { text: 'Introduction', link: 'en/introduction' },
+    // ...
+  ],
++  es: [
++    { text: 'Encabezado de sección', header: true, },
++    { text: 'Introducción', link: 'es/introduction' },
++    // ...
++  ],
+};
 
-### Linting
+// ...
+```
 
-This project uses ESLint for linting. That is configured in `.eslintrc.js`.
+If you plan to use Spanish as the the default language, you just need to modify the redirect path in `src/pages/index.astro`:
 
-### Formatting
+```diff
+<script>
+- window.location.pathname = `/en/introduction`;
++ window.location.pathname = `/es/introduction`;
+</script>
+```
 
-We use [Prettier](https://prettier.io/) for auto-formatting in this project. It's recommended to install an editor plugin (like the [VSCode Prettier plugin](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)) to get auto-formatting on save. There's also a `npm run format` script you can run to format all files in the project.
+You can also remove the above script and write a landing page in Spanish instead.
+
+### What if I don't plan to support multiple languages?
+
+That's totally fine! Not all projects need (or can support) multiple languages. You can continue to use this theme without ever adding a second language.
+
+If that single language is not English, you can just replace `en` in directory layouts and configurations with the preferred language.
+
+### Search (Powered by Algolia)
+
+[Algolia](https://www.algolia.com/) offers a free service to qualified open source projects called [DocSearch](https://docsearch.algolia.com/). If you are accepted to the DocSearch program, provide your API Key & index name in `src/config.ts` and a search box will automatically appear in your site header.
+
+Note that Aglolia and Astro are not affiliated. We have no say over acceptance to the DocSearch program.
+
+If you'd prefer to remove Algolia's search and replace it with your own, check out the `src/components/Header.astro` component to see where the component is added.

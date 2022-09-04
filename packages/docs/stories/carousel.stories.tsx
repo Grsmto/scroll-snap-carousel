@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { expect } from '@storybook/jest';
-import type { ComponentStory } from '@storybook/react';
+import type { ComponentStoryFn } from '@storybook/react';
 import { userEvent, waitFor, within } from '@storybook/testing-library';
 import {
   useDragToScroll,
@@ -31,6 +31,7 @@ const Carousel: FC<{
   // const index = 0;
 
   React.useEffect(() => {
+    console.log(index)
     onChange(index);
   }, [index, onChange]);
 
@@ -45,9 +46,9 @@ const Carousel: FC<{
   return (
     <div className={className}>
       <div ref={ref} className="carousel-container">
-        {slides.map((slide) => (
+        {slides.map((slide, i) => (
           <div className="slide" key={slide}>
-            {slide}
+            <img src={`/images/${i}.jpg`} width={400} height={500} />
           </div>
         ))}
       </div>
@@ -80,16 +81,14 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<any> = (args) => <Carousel {...args} />;
+const Template: ComponentStoryFn<any> = (args) => <Carousel {...args} />;
 
 export const FullWidth = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 FullWidth.args = {
   primary: true,
   className: 'full-width',
-  argTypes: {
-    onChange: { action: true },
-  },
+  onChange: () => {},
 };
 
 export const Thumbnails = Template.bind({});

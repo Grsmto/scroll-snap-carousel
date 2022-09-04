@@ -1,6 +1,5 @@
 .carousel-container {
   display: flex;
-  height: 50vh;
   align-items: center;
   align-content: center;
   scroll-snap-type: x mandatory;
@@ -24,7 +23,20 @@
   box-sizing: border-box;
   display: grid;
   place-items: center;
-  padding: 0 15px;
+  margin-right: 20px;
+  border-radius: 18px;
+  box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
+  overflow: hidden;
+}
+
+.slide:hover {
+  box-shadow: 2px 4px 16px rgb(0 0 0 / 16%);
+}
+
+.slide img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
 }
 
 .thumbnails .slide {

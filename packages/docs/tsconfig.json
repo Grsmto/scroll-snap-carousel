@@ -1,25 +1,11 @@
 {
-  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2019"],
-    "types": ["vitest/globals"],
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "jsx": "react-jsx",
+    "target": "ES2020",
     "module": "CommonJS",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "target": "ES2019",
-    "strict": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["./app/*"]
-    },
+    "esModuleInterop": true,
+    "jsx": "preserve",
     "skipLibCheck": true,
-
-    // Remix takes care of building everything in `remix build`.
-    "noEmit": true
-  }
+  },
+  "include": ["src/*", ".storybook/main.ts"]
 }
