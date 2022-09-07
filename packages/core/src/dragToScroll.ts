@@ -143,8 +143,13 @@ export const dragToScroll = ({
 
     const dragEndPositionX = root.scrollLeft;
     const dragEndPositionY = root.scrollTop;
-    const scrollTargetX = getClosest(elementPositionsX, dragEndPositionX);
+    const isDraggedAllTheWay =
+      root.scrollWidth - root.offsetWidth === root.scrollLeft;
+    const scrollTargetX = isDraggedAllTheWay
+      ? elementPositionsX[elementPositionsX.length - 1]
+      : getClosest(elementPositionsX, dragEndPositionX);
     const scrollTargetY = getClosest(elementPositionsY, dragEndPositionY);
+
     const targetIndex =
       scrollTargetX > 0
         ? elementPositionsX.indexOf(scrollTargetX)
