@@ -1,46 +1,18 @@
-.carousel-container {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  overflow-y: hidden;
-  overflow-x: auto;
-  flex-direction: row;
-  max-width: 100%;
-  padding: 100px 0;
+.carousel-story .carousel-container {
+  padding: 20px 0;
 }
 
-.slide {
-  /* width: calc(33.33% - ((2 * 10vw) / 3)); */
+.carousel-story.full-width .slide {
   width: 100%;
-  flex-shrink: 0;
-  height: 100%;
-  scroll-snap-align: center;
-  background-color: #c9edf2;
-  background-clip: content-box;
-  box-sizing: border-box;
-  display: grid;
-  place-items: center;
-  margin-right: 20px;
-  border-radius: 18px;
-  box-shadow: 2px 4px 12px rgb(0 0 0 / 8%);
-  overflow: hidden;
 }
 
-.slide:hover {
-  box-shadow: 2px 4px 16px rgb(0 0 0 / 16%);
-}
-
-.slide img {
+.carousel-story .slide img {
   display: block;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-.thumbnails .slide {
-  width: calc(33.33% - ((2 * 10vw) / 3));
+.carousel-story.thumbnails .slide {
   scroll-snap-align: start;
 }
 
@@ -53,49 +25,29 @@
 } */
 
 @media (max-width: 640px) {
-  .slide {
+  .carousel-story .slide {
     width: calc(50% - ((2 * 5vw) / 2));
   }
 
-  .slide:first-child {
+  .carousel-story .slide:first-child {
     margin-left: 5vw;
   }
 
-  .slide:last-child {
+  .carousel-story .slide:last-child {
     margin-right: 5vw;
   }
 }
 
 @media (max-width: 320px) {
-  .slide {
+  .carousel-story .slide {
     width: 100%;
   }
 
-  .slide:first-child {
+  .carousel-story .slide:first-child {
     margin-left: 20px;
   }
 
-  .slide:last-child {
+  .carousel-story .slide:last-child {
     margin-right: 20px;
   }
-}
-
-.carousel-indicator {
-  display: flex;
-  justify-content: center;
-}
-
-.carousel-indicator__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 10px;
-  background-color: lightgray;
-}
-
-.carousel-indicator__dot+.carousel-indicator__dot {
-  margin-left: 10px;
-}
-
-.carousel-indicator__dot.active {
-  background-color: lightgreen;
 }

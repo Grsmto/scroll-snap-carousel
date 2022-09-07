@@ -17,21 +17,14 @@ const Carousel: FC<{
 }> = ({ className, onChange }) => {
   const ref = React.useRef<HTMLDivElement | null>(null);
 
-  let slidesLength = 10;
-  let slides = [];
-
-  for (let index = 0; index < slidesLength; index++) {
-    slides.push(`Slide ${index + 1}`);
-  }
-
   useDragToScroll({ ref });
 
   const scrollTo = useScroll({ ref });
   const index = useActiveSnap({ ref });
   // const index = 0;
+  const slides = Array.from(new Array(6));
 
   React.useEffect(() => {
-    console.log(index)
     onChange(index);
   }, [index, onChange]);
 
@@ -44,10 +37,10 @@ const Carousel: FC<{
   }, [index]);
 
   return (
-    <div className={className}>
+    <div className={`carousel-story ${className}`}>
       <div ref={ref} className="carousel-container">
-        {slides.map((slide, i) => (
-          <div className="slide" key={slide}>
+        {slides.map((_, i) => (
+          <div className="slide" key={i}>
             <img src={`/images/${i}.jpg`} width={400} height={500} />
           </div>
         ))}
