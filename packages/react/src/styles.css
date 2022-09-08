@@ -18,6 +18,15 @@
   max-width: 100%;
 }
 
+.snap-carousel-container::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+.snap-carousel-container > * {
+  scroll-snap-align: center;
+}
+
 .snap-carousel-inner {
   display: flex;
 }
