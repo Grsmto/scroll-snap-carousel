@@ -1,3 +1,20 @@
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  box-sizing: content-box;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
+  overflow: visible;
+  vertical-align: inherit;
+}
+
+.carousel {
+  position: relative;
+}
+
 .carousel-container {
   display: flex;
   align-items: center;
@@ -13,6 +30,7 @@
 
 .carousel-container::-webkit-scrollbar {
   width: 0px;
+  height: 0px;
 }
 
 .slide {
@@ -52,4 +70,50 @@
 
 .carousel-indicator__dot.active {
   background-color: lightgreen;
+}
+
+.carousel-nav button {
+  display: block;
+  font-style: normal;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  transition: background-color .1s linear, color .1s linear, opacity .1s linear;
+  width: 52px;
+  height: 52px;
+  border-radius: 52px;
+  top: 49%;
+  margin-top: -21px;
+  transform: scale(.8);
+  opacity: 0;
+  transition: transform .5s ease-in,opacity .7s cubic-bezier(.15,0,.2,1) .1s;
+  background-color: rgba(0,0,0,.2);
+  color: #fff;
+  line-height: 0;
+}
+
+.carousel-nav button:hover {
+  background-color: rgba(0,0,0,.6);
+}
+
+.carousel:hover .carousel-nav button:hover:not([disabled]),
+.carousel:hover .carousel-nav button:not([disabled]) {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.carousel-nav__btn--previous {
+  left: 18px;
+}
+
+.carousel-nav__btn--previous svg {
+  transform: rotateZ(90deg)
+}
+
+.carousel-nav__btn--next {
+  right: 18px;
+}
+
+.carousel-nav__btn--next svg {
+  transform: rotateZ(-90deg);
 }

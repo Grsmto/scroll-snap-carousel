@@ -51,3 +51,9 @@
     margin-right: 20px;
   }
 }
+
+/* @media (min-width: 900px) {
+  .carousel-story .carousel-indicator__dot:nth-child(n+3) {
+    display: none;
+  }
+} */

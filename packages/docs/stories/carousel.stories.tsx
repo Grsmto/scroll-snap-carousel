@@ -8,6 +8,7 @@ import {
   useActiveSnap,
 } from '@snap-carousel/react';
 import '@snap-carousel/react/dist/styles.css';
+import { Chevron } from './icons/Chevron';
 
 import './carousel.css';
 
@@ -15,6 +16,7 @@ const Carousel: FC<{
   className: string;
   onChange: (index: number) => void;
 }> = ({ className, onChange }) => {
+  const [visibleSlides, setVisibleSlides] = React.useState(0);
   const ref = React.useRef<HTMLDivElement | null>(null);
 
   useDragToScroll({ ref });
@@ -36,30 +38,56 @@ const Carousel: FC<{
     scrollTo(index + 1);
   }, [index]);
 
+  React.useEffect(() => {
+    const slideWidth = 400;
+
+    if (!ref.current) return;
+
+    setVisibleSlides(
+      Math.ceil(
+        (ref.current.scrollWidth - ref.current.offsetWidth) / slideWidth
+      ) + 1
+    );
+  }, []);
+
   return (
     <div className={`carousel-story ${className}`}>
-      <div ref={ref} className="carousel-container">
-        {slides.map((_, i) => (
-          <div className="slide" key={i}>
-            <img src={`/images/${i}.jpg`} width={400} height={500} />
-          </div>
-        ))}
+      <div className="carousel">
+        <div ref={ref} className="carousel-container">
+          {slides.map((_, i) => (
+            <div className="slide" key={i}>
+              <img src={`/images/${i}.jpg`} width={400} height={500} />
+            </div>
+          ))}
+        </div>
+        <div className="carousel-nav">
+          <button
+            className="carousel-nav__btn--previous"
+            onClick={handlePrevious}
+            disabled={index === 0}
+            aria-hidden={index === 0}
+            aria-label="Previous"
+          >
+            <Chevron />
+          </button>
+          <button
+            className="carousel-nav__btn--next"
+            onClick={handleNext}
+            disabled={index === slides.length - 1}
+            aria-hidden={index === 0}
+            aria-label="Next"
+          >
+            <Chevron />
+          </button>
+        </div>
       </div>
       <div className="carousel-indicator">
-        {slides.map((_, i) => (
+        {Array.from(new Array(visibleSlides)).map((_, i) => (
           <div
             key={i}
             className={`carousel-indicator__dot ${index === i ? 'active' : ''}`}
           />
         ))}
-      </div>
-      <div className="">
-        <button onClick={handlePrevious} disabled={index === 0}>
-          Previous
-        </button>
-        <button onClick={handleNext} disabled={index === slides.length - 1}>
-          Next
-        </button>
       </div>
     </div>
   );
