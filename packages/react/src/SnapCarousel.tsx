@@ -21,6 +21,7 @@ export type PolymorphicRef<C extends React.ElementType> =
 
 type Props<T extends ElementType> = {
   children?: React.ReactNode;
+  className?: string;
   tag?: T;
   index?: number;
   onIndexChange?: (index: number) => void;
@@ -28,7 +29,7 @@ type Props<T extends ElementType> = {
 
 export const SnapCarousel = React.forwardRef(
   <T extends ElementType = 'div'>(
-    { children, tag, index, onIndexChange, ...otherProps }: Props<T>,
+    { children, tag, index, onIndexChange, className, ...otherProps }: Props<T>,
     ref?: PolymorphicRef<T>
   ) => {
     const RootTag = tag || 'div';
@@ -49,7 +50,7 @@ export const SnapCarousel = React.forwardRef(
 
     return (
       <RootTag
-        className="snap-carousel-container"
+        className={`snap-carousel-container ${className}`}
         ref={mergedRef}
         {...otherProps}
       >
