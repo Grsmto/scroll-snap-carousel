@@ -54,14 +54,11 @@ export const scrollTo = ({
     const item = mapItem({ element, viewport });
 
     let target = { left: 0, top: 0 };
+
     switch (item.snapAlign) {
       case 'start':
         target = {
-          left:
-            item.left -
-            item.paddingLeft -
-            viewport.paddingLeft -
-            viewport.scrollPaddingLeft,
+          left: item.left - viewport.paddingLeft - viewport.scrollPaddingLeft,
           top:
             item.top -
             item.paddingTop -
