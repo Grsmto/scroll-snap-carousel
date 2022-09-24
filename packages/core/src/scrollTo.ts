@@ -115,5 +115,5 @@ export const scrollTo = ({
 
   const cancel = goTo(index);
 
-  return { cancel, index };
+  return { cancel };
 };
