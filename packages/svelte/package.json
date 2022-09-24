@@ -1,6 +1,6 @@
 {
   "name": "@snap-carousel/svelte",
-  "version": "0.0.15-next.0",
+  "version": "0.0.16-next.2",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
