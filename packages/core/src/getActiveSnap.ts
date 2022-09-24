@@ -1,11 +1,12 @@
-import { mapStyles, debounceHOF } from './utils';
+import { debounceHOF } from './utils';
 
 export const getActiveSnap = ({
   root,
   onChange,
+  snapAlign = 'start'
 }: {
   root: HTMLDivElement;
-  snapPerPage?: number;
+  snapAlign?: 'start' | 'center' | 'end';
   onChange?: (snapIndex: number) => void;
 }) => {
   let activeSnapObserver: IntersectionObserver;
@@ -58,13 +59,10 @@ export const getActiveSnap = ({
 
   const init = () => {
     const rootWidth = root.offsetWidth;
-    const item = mapStyles(children[0]);
-
-    // TODO: detect snapAlign config in another way. Only 1 supported per carousel.
 
     activeSnapIndex = 0;
 
-    switch (item.snapAlign) {
+    switch (snapAlign) {
       case 'start':
         activeSnapObserver = new IntersectionObserver(
           (entries) => {
@@ -104,7 +102,7 @@ export const getActiveSnap = ({
         activeSnapObserver = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              console.log('active snap: ', entry);
+              // console.log('active snap: ', entry);
 
               if (activeSnapIndex === null || !isScrolling) return;
 
@@ -143,7 +141,7 @@ export const getActiveSnap = ({
         activeSnapObserver = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              console.log('active snap: ', entry);
+              // console.log('active snap: ', entry);
 
               if (activeSnapIndex === null || !isScrolling || !entry.rootBounds)
                 return;
