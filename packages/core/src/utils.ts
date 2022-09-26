@@ -6,6 +6,17 @@ const extractStyleProperty = (
   styles: CSSStyleDeclaration
 ): any => styles[property] || '';
 
+export const getStyles = (
+  $item: HTMLElement | Element,
+  props: Array<keyof CSSStyleDeclaration>
+) => {
+  const styles = window.getComputedStyle($item) as CSSStyleDeclaration;
+  return props.reduce((acc: { [key: string]: string | number }, curr) => {
+    (acc[curr] as any) = parseInt(extractStyleProperty(curr, styles));
+    return acc;
+  }, {});
+};
+
 export const mapStyles = ($item: HTMLElement | Element) => {
   const styles = window.getComputedStyle($item) as CSSStyleDeclaration;
 
@@ -37,13 +48,8 @@ export const mapItem = ({
   element: HTMLElement;
   viewport: { offsetLeft: number; offsetTop: number };
 }) => {
-  const {
-    paddingLeft,
-    paddingRight,
-    paddingTop,
-    paddingBottom,
-    snapAlign,
-  } = mapStyles(element);
+  const { paddingLeft, paddingRight, paddingTop, paddingBottom, snapAlign } =
+    mapStyles(element);
   const left = element.offsetLeft - viewport.offsetLeft + paddingLeft;
   const width = element.offsetWidth - paddingLeft - paddingRight;
   const right = left + width;

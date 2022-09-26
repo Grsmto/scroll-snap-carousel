@@ -1,4 +1,4 @@
-import { isTouchDevice, mapItem } from './utils';
+import { getStyles, isTouchDevice, mapItem } from './utils';
 import { scrollTo } from './scrollTo';
 
 // as found on stackoverflow: https://stackoverflow.com/a/19277804
@@ -58,6 +58,12 @@ export const dragToScroll = ({
   let slideX = 0;
   let slideY = 0;
   let originalScrollSnapType: string | undefined = undefined;
+
+  const $viewport: HTMLElement = root;
+  const viewportStyles = getStyles($viewport, [
+    'paddingLeft',
+    'scrollPaddingLeft',
+  ]);
 
   // used to determine whether slider is scrolling. After scrolling ends, reset css classes
   const handleScrolling = () => {
@@ -141,7 +147,12 @@ export const dragToScroll = ({
 
     if (originalScrollSnapType === 'none') return;
 
-    const dragEndPositionX = root.scrollLeft;
+    const dragEndPositionX =
+      root.scrollLeft +
+      ((root.scrollLeft > 0
+        ? viewportStyles.scrollPaddingLeft || 0
+        : viewportStyles.paddingLeft || 0) as number);
+    console.log(viewportStyles.scrollPaddingLeft);
     const dragEndPositionY = root.scrollTop;
     const isDraggedAllTheWay =
       root.scrollWidth - root.offsetWidth === root.scrollLeft;
