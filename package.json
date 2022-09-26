@@ -14,7 +14,7 @@
     "build": "lerna run build",
     "test": "lerna run test",
     "release": "lerna run build && lerna run test && auto shipit",
-    "dev": "lerna run --parallel --scope @snap-carousel/core --scope @snap-carousel/react start"
+    "dev": "lerna run --parallel --scope @snap-carousel/core --scope @snap-carousel/react --scope @snap-carousel/svelte start"
   },
   "devDependencies": {
     "@babel/core": "^7.18.13",
