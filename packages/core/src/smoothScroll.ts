@@ -82,5 +82,6 @@ export const smoothScroll = (
   duration: number
 ) => {
   if (!node) return;
+  // Can't use scrollIntoView() yet since Safari support is still weak: https://caniuse.com/scrollintoview
   return smoothScrollPolyfill({ node, scrollTarget, duration });
 };

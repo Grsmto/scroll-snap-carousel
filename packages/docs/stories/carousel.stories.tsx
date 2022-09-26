@@ -23,6 +23,7 @@ const Carousel: FC<{
 
   const scrollTo = useScroll({ ref });
   const index = useActiveSnap({ ref });
+
   // const index = 0;
   const slides = Array.from(new Array(6));
 
@@ -121,9 +122,7 @@ Thumbnails.args = {
 Thumbnails.play = async ({ args, canvasElement }) => {
   const canvas = within(canvasElement);
 
-  const nextBtn = canvas.getByText('Next', {
-    selector: 'button',
-  });
+  const nextBtn = canvasElement.querySelector('.carousel-nav__btn--next');
 
   await userEvent.click(nextBtn);
 
@@ -133,4 +132,16 @@ Thumbnails.play = async ({ args, canvasElement }) => {
     ).toBeDefined()
   );
   await waitFor(() => expect(args.onChange).toHaveBeenCalled());
+};
+
+export const WithPadding = Template.bind({});
+WithPadding.args = {
+  className: 'with-padding',
+  onChange: () => {},
+};
+
+export const WithPaddingChild = Template.bind({});
+WithPaddingChild.args = {
+  className: 'with-padding-child',
+  onChange: () => {},
 };

@@ -12,8 +12,8 @@
   object-fit: contain;
 }
 
-.carousel-story.thumbnails .slide {
-  scroll-snap-align: start;
+.carousel-story .slide {
+  scroll-snap-align: center;
 }
 
 /* .slide:first-child {
@@ -57,3 +57,12 @@
     display: none;
   }
 } */
+
+.carousel-story.with-padding .carousel-container {
+  padding-left: 300px;
+  scroll-padding-left: 300px;
+}
+
+.carousel-story.with-padding-child .carousel-container .slide:first-child {
+  padding-left: 300px;
+}
