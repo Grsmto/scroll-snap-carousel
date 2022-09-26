@@ -13,7 +13,7 @@ const getElementPositionX = (
 
   switch (item.snapAlign) {
     case 'start':
-      return item.left;
+      return Math.max(0, item.left);
     case 'end':
       return item.left - (viewport.offsetWidth / 2 - item.width / 2);
     case 'center':

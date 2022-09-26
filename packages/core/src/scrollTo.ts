@@ -95,8 +95,14 @@ export const scrollTo = ({
     }
 
     return {
-      left: target.left,
-      top: target.top,
+      left: Math.min(
+        Math.max(0, target.left),
+        viewport.scrollWidth - viewport.width
+      ),
+      top: Math.min(
+        Math.max(0, target.top),
+        viewport.scrollHeight - viewport.height
+      ),
     };
   };
 
