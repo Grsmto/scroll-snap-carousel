@@ -8,9 +8,8 @@ export const getActiveSnap = ({
   onChange?: (snapIndex: number) => void;
 }) => {
   let activeSnapObserver: IntersectionObserver;
-  let activeSnapIndex: number;
+  let activeSnapIndex = 0;
   let timeout: number | null = null;
-  let isScrolling = false;
 
   const children = root.children;
 
@@ -30,7 +29,6 @@ export const getActiveSnap = ({
 
   const setSnapIndex = (snapIndex: number) => {
     activeSnapIndex = snapIndex;
-
     triggerChange(snapIndex);
   };
 
@@ -42,11 +40,9 @@ export const getActiveSnap = ({
   const onResizeWithDebounce = debounceHOF(onResize, 100);
 
   const handleScrolling = () => {
-    isScrolling = true;
     if (timeout) clearTimeout(timeout);
 
     timeout = setTimeout(() => {
-      isScrolling = false;
       if (root.scrollLeft === 0) {
         setSnapIndex(0);
       }
@@ -207,5 +203,8 @@ export const getActiveSnap = ({
 
   return {
     destroy,
+    getActiveIndex: () => {
+      return activeSnapIndex;
+    },
   };
 };

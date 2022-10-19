@@ -14,11 +14,13 @@ export const carousel = (node: HTMLDivElement, options = {}) => {
 
   if (_options.dragToScroll) dragToScroll = _dragToScroll({ root: node });
 
-  getActiveSnap({ root: node });
+  const activeSnap = getActiveSnap({ root: node });
 
   return {
+    getActiveIndex: activeSnap.getActiveIndex,
     destroy() {
       if (_options.dragToScroll) dragToScroll.disable();
+      activeSnap.destroy();
     },
   };
 };
