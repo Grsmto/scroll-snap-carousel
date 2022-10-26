@@ -3,18 +3,18 @@ import {
   getActiveSnap,
   scrollTo,
 } from '@snap-carousel/core';
+import SnapCarousel from './SnapCarousel.svelte';
 
 export const carousel = (node: HTMLDivElement, options = {}) => {
-  const _options = { dragToScroll: true, ...options };
-  let dragToScroll: {
-    isDragging: boolean;
-    disable: () => void;
-    enable: () => void;
-  };
+  const _options = { dragToScroll: true, onIndexChange: () => {}, ...options };
+  let dragToScroll: ReturnType<typeof _dragToScroll>;
 
   if (_options.dragToScroll) dragToScroll = _dragToScroll({ root: node });
 
-  const activeSnap = getActiveSnap({ root: node });
+  const activeSnap = getActiveSnap({
+    root: node,
+    onChange: _options.onIndexChange,
+  });
 
   return {
     getActiveIndex: activeSnap.getActiveIndex,
@@ -25,4 +25,4 @@ export const carousel = (node: HTMLDivElement, options = {}) => {
   };
 };
 
-export { scrollTo };
+export { scrollTo, SnapCarousel };
