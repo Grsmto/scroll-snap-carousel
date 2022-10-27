@@ -6,4 +6,10 @@ export { useDragToScroll } from './useDragToScroll';
 export { useScroll } from './useScroll';
 export { useActiveSnap } from './useActiveSnap';
 
-export { SnapCarousel } from './SnapCarousel';
+export {
+  SnapCarousel,
+  useSnapCarousel,
+  SnapCarouselIndicator,
+  SnapCarouselNavPrev,
+  SnapCarouselNavNext,
+} from './SnapCarousel';

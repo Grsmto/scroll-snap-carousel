@@ -1,10 +1,19 @@
 import React from 'react';
-import { SnapCarousel } from '@snap-carousel/react';
+import {
+  useSnapCarousel,
+  SnapCarousel,
+  SnapCarouselIndicator,
+  SnapCarouselNavPrev,
+  SnapCarouselNavNext,
+} from '@snap-carousel/react';
 import '@snap-carousel/react/src/styles.css';
 
 import './SnapCarousel.css';
 
+import { Chevron } from './icons/Chevron';
+
 const Carousel = ({ className }) => {
+  const state = useSnapCarousel();
   let slidesLength = 10;
   let slides = [];
 
@@ -14,29 +23,39 @@ const Carousel = ({ className }) => {
 
   return (
     <div className={`SnapCarousel-story ${className}`}>
-      <SnapCarousel>
-        {slides.map((slide) => (
-          <div className="slide" key={slide}>
-            {slide}
-          </div>
-        ))}
-      </SnapCarousel>
-      {/* <div className="carousel-indicator">
-        {slides.map((_, i) => (
-          <div
-            key={i}
-            className={`carousel-indicator__dot ${index === i ? 'active' : ''}`}
-          />
-        ))}
+      <div className="carousel">
+        <SnapCarousel state={state} defaultIndex={9}>
+          {slides.map((slide) => (
+            <div className="slide" key={slide}>
+              {slide}
+            </div>
+          ))}
+        </SnapCarousel>
+        <div className="carousel-indicator">
+          {slides.map((_, i) => (
+            <SnapCarouselIndicator
+              key={i}
+              className="carousel-indicator__dot"
+              index={i}
+              state={state}
+            />
+          ))}
+        </div>
+        <div className="carousel-nav">
+          <SnapCarouselNavPrev
+            state={state}
+            className="carousel-nav__btn--previous"
+          >
+            <Chevron />
+          </SnapCarouselNavPrev>
+          <SnapCarouselNavNext
+            state={state}
+            className="carousel-nav__btn--next"
+          >
+            <Chevron />
+          </SnapCarouselNavNext>
+        </div>
       </div>
-      <div className="">
-        <button onClick={handlePrevious} disabled={index === 0}>
-          Previous
-        </button>
-        <button onClick={handleNext} disabled={index === slides.length - 1}>
-          Next
-        </button>
-      </div> */}
     </div>
   );
 };

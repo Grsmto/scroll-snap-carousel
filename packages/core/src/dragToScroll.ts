@@ -152,7 +152,7 @@ export const dragToScroll = ({
       ((root.scrollLeft > 0
         ? viewportStyles.scrollPaddingLeft || 0
         : viewportStyles.paddingLeft || 0) as number);
-    console.log(viewportStyles.scrollPaddingLeft);
+
     const dragEndPositionY = root.scrollTop;
     const isDraggedAllTheWay =
       root.scrollWidth - root.offsetWidth === root.scrollLeft;
