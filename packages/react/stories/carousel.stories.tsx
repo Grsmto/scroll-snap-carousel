@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import { expect } from '@storybook/jest';
-import type { ComponentStoryFn } from '@storybook/react';
-import { userEvent, waitFor, within } from '@storybook/testing-library';
+import { expect, jest } from '@storybook/jest';
+import type { StoryFn } from '@storybook/react';
+import { userEvent, waitFor } from '@storybook/testing-library';
 import {
   useDragToScroll,
   useScroll,
@@ -28,6 +28,7 @@ const Carousel: FC<{
   const slides = Array.from(new Array(6));
 
   React.useEffect(() => {
+    console.log('onChange');
     onChange(index);
   }, [index, onChange]);
 
@@ -103,7 +104,7 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStoryFn<any> = (args) => <Carousel {...args} />;
+const Template: StoryFn<any> = (args) => <Carousel {...args} />;
 
 export const FullWidth = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -116,22 +117,21 @@ FullWidth.args = {
 export const Thumbnails = Template.bind({});
 Thumbnails.args = {
   className: 'thumbnails',
-  onChange: () => {},
+  onChange: jest.fn(),
 };
 
 Thumbnails.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
-
   const nextBtn = canvasElement.querySelector('.carousel-nav__btn--next');
 
-  await userEvent.click(nextBtn);
+  userEvent.click(nextBtn);
 
   await waitFor(() =>
     expect(
       canvasElement.getElementsByClassName('.carousel-indicator__dot.active')
     ).toBeDefined()
   );
-  await waitFor(() => expect(args.onChange).toHaveBeenCalled());
+
+  await expect(args.onChange).toHaveBeenCalled();
 };
 
 export const WithPadding = Template.bind({});

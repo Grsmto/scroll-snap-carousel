@@ -17,7 +17,7 @@
     "dev": "lerna run --parallel --scope @snap-carousel/core --scope @snap-carousel/react --scope @snap-carousel/svelte start"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.13",
+    "@babel/core": "^7.19.6",
     "@babel/preset-react": "^7.18.6",
     "@rollup/plugin-typescript": "^8.3.2",
     "@typescript-eslint/eslint-plugin": "^3.2.0",
@@ -25,17 +25,18 @@
     "auto": "^10.36.5",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
-    "lerna": "^3.22.1",
+    "jest": "27",
+    "jest-environment-jsdom": "27",
+    "jest-snapshot": "27",
+    "lerna": "^6.0.1",
     "prettier": "^2.7.1",
     "prettier-eslint": "^15.0.1",
     "prettier-eslint-cli": "^6.0.1",
     "rollup": "^2.75.7",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-serve": "^1.0.3",
+    "ts-jest": "^29.0.3",
     "tslib": "^2.0.0",
     "typescript": "^4.7.4"
-  },
-  "resolutions": {
-    "@storybook/react": "7.0.0-alpha.29"
   }
 }

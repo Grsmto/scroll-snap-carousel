@@ -8,10 +8,7 @@
     "check": "astro check && tsc",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "storybook": "storybook dev",
-    "build-storybook": "storybook build",
-    "test-storybook": "test-storybook"
+    "astro": "astro"
   },
   "dependencies": {
     "@algolia/client-search": "^4.13.1",
@@ -19,24 +16,13 @@
     "@astrojs/react": "^1.1.0",
     "@docsearch/css": "^3.1.0",
     "@docsearch/react": "^3.1.0",
-    "@storybook/addon-actions": "^7.0.0-alpha.29",
-    "@storybook/addon-essentials": "^7.0.0-alpha.29",
-    "@storybook/addon-links": "^7.0.0-alpha.29",
-    "@storybook/addons": "7.0.0-alpha.29",
-    "@storybook/jest": "^0.0.10",
-    "@storybook/react": "^7.0.0-alpha.29",
-    "@storybook/react-webpack5": "^7.0.0-alpha.29",
-    "@storybook/testing-library": "^0.0.14-next.0",
     "@types/node": "^18.0.0",
-    "@types/react": "^17.0.45",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
     "astro": "^1.1.5",
     "preact": "^10.7.3",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "webpack": "5"
-  },
-  "devDependencies": {
-    "storybook": "future"
   }
 }
