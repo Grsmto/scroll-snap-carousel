@@ -9,11 +9,14 @@ export const getActiveSnap = ({
 }) => {
   let activeSnapObserver: IntersectionObserver;
   let activeSnapIndex = 0;
-  let timeout: number | null = null;
+  let observers = new WeakMap();
 
   const children = root.children;
+  const firstChild = root.children[0] as HTMLElement;
 
   const triggerChange = (snapIndex: number) => {
+    if (root.classList.contains('scrolling')) return;
+
     onChange && onChange(snapIndex);
     root.dispatchEvent(
       new CustomEvent('snap-change', {
@@ -25,6 +28,12 @@ export const getActiveSnap = ({
   const destroy = () => {
     activeSnapObserver.disconnect();
     window.removeEventListener('resize', onResizeWithDebounce);
+    Array.from(root.children).forEach((child) => {
+      if (observers.has(child)) {
+        observers.get(child).disconnect();
+      }
+    });
+    observers = new WeakMap();
   };
 
   const setSnapIndex = (snapIndex: number) => {
@@ -58,16 +67,20 @@ export const getActiveSnap = ({
     activeSnapObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          let observer: IntersectionObserver | undefined;
-
           if (entry.isIntersecting) {
             const styles = window.getComputedStyle(
               entry.target
             ) as CSSStyleDeclaration;
+            if (observers.has(entry.target)) return;
+
             const observer = getObserver(styles.scrollSnapAlign);
             observer.observe(entry.target);
+            observers.set(entry.target, observer);
           } else {
-            if (observer) observer.disconnect();
+            if (observers.has(entry.target)) {
+              observers.get(entry.target).disconnect();
+              observers.delete(entry.target);
+            }
           }
         });
       },
