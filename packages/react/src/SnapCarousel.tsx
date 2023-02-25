@@ -78,14 +78,17 @@ export const SnapCarousel = React.forwardRef(
 
 SnapCarousel.displayName = 'SnapCarousel';
 
-type IndicatorProps<T extends ElementType> = {
+type CommonProps<T extends ElementType> = {
   children?: React.ReactNode;
   className?: string;
   tag?: T;
-  index: number;
   activeIndex?: number;
   state?: State;
 };
+
+interface IndicatorProps<T extends ElementType> extends CommonProps<T> {
+  index: number;
+}
 
 export const SnapCarouselIndicator = React.forwardRef(
   <T extends ElementType = 'button'>(
@@ -135,7 +138,7 @@ export const SnapCarouselNavPrev = React.forwardRef(
       className = '',
       state,
       ...otherProps
-    }: IndicatorProps<T>,
+    }: CommonProps<T>,
     ref?: PolymorphicRef<T>
   ) => {
     const RootTag = tag || 'button';
@@ -178,7 +181,7 @@ export const SnapCarouselNavNext = React.forwardRef(
       className = '',
       state,
       ...otherProps
-    }: IndicatorProps<T>,
+    }: CommonProps<T>,
     ref?: PolymorphicRef<T>
   ) => {
     const RootTag = tag || 'button';
