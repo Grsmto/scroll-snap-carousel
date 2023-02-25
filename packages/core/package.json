@@ -1,6 +1,6 @@
 {
   "name": "@snap-carousel/core",
-  "version": "0.0.18-next.0",
+  "version": "0.0.19-next.4",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
