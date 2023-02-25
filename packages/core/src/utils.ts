@@ -11,8 +11,8 @@ export const getStyles = (
   props: Array<keyof CSSStyleDeclaration>
 ) => {
   const styles = window.getComputedStyle($item) as CSSStyleDeclaration;
-  return props.reduce((acc: { [key: string]: string | number }, curr) => {
-    (acc[curr] as any) = parseInt(extractStyleProperty(curr, styles));
+  return props.reduce((acc: { [key: string]: number }, curr) => {
+    acc[curr as string] = parseInt(extractStyleProperty(curr, styles)) || 0;
     return acc;
   }, {});
 };

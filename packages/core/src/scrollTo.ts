@@ -5,10 +5,12 @@ export const scrollTo = ({
   root,
   index,
   duration = 350,
+  onScrollEnd,
 }: {
   root: any;
   index: number;
   duration?: number;
+  onScrollEnd?: () => void;
 }) => {
   const getScrollFor = (
     index: number
@@ -110,7 +112,7 @@ export const scrollTo = ({
     const scrollTarget = getScrollFor(index);
 
     if (scrollTarget) {
-      return smoothScroll(root, scrollTarget, duration);
+      return smoothScroll(root, scrollTarget, duration, onScrollEnd);
     }
 
     return;

@@ -5,10 +5,12 @@ const smoothScrollPolyfill = ({
   node,
   scrollTarget,
   duration,
+  onScrollEnd,
 }: {
   node: HTMLDivElement;
   scrollTarget: { left: number; top: number };
   duration: number;
+  onScrollEnd?: () => void;
 }) => {
   const startTime = Date.now();
   const offsetLeft = node.scrollLeft;
@@ -33,6 +35,7 @@ const smoothScrollPolyfill = ({
       node.scrollLeft = scrollTarget.left;
       node.scrollTop = scrollTarget.top;
       cleanup();
+      onScrollEnd && onScrollEnd();
       return;
     }
     const nextScrollLeft = easingOutQuint(
@@ -79,9 +82,10 @@ const smoothScrollPolyfill = ({
 export const smoothScroll = (
   node: HTMLDivElement | null,
   scrollTarget: { left: number; top: number },
-  duration: number
+  duration: number,
+  onScrollEnd?: () => void
 ) => {
   if (!node) return;
   // Can't use scrollIntoView() yet since Safari support is still weak: https://caniuse.com/scrollintoview
-  return smoothScrollPolyfill({ node, scrollTarget, duration });
+  return smoothScrollPolyfill({ node, scrollTarget, duration, onScrollEnd });
 };
