@@ -16,7 +16,7 @@ const Carousel: FC<{
   className: string;
   onChange: (index: number) => void;
 }> = ({ className, onChange }) => {
-  const [visibleSlides, setVisibleSlides] = React.useState(0);
+  // const [visibleSlides, setVisibleSlides] = React.useState(0);
   const ref = React.useRef<HTMLDivElement | null>(null);
 
   useDragToScroll({ ref });
@@ -28,7 +28,6 @@ const Carousel: FC<{
   const slides = Array.from(new Array(6));
 
   React.useEffect(() => {
-    console.log('onChange');
     onChange(index);
   }, [index, onChange]);
 
@@ -40,17 +39,17 @@ const Carousel: FC<{
     scrollTo(index + 1);
   }, [index]);
 
-  React.useEffect(() => {
-    const slideWidth = 400;
+  // React.useEffect(() => {
+  //   const slideWidth = 400;
 
-    if (!ref.current) return;
-
-    setVisibleSlides(
-      Math.ceil(
-        (ref.current.scrollWidth - ref.current.offsetWidth) / slideWidth
-      ) + 1
-    );
-  }, []);
+  //   if (!ref.current) return;
+  //   console.log(ref.current.scrollWidth);
+  //   setVisibleSlides(
+  //     Math.ceil(
+  //       (ref.current.scrollWidth - ref.current.offsetWidth) / slideWidth
+  //     ) + 1
+  //   );
+  // }, []);
 
   return (
     <div className={`carousel-story ${className}`}>
@@ -84,10 +83,12 @@ const Carousel: FC<{
         </div>
       </div>
       <div className="carousel-indicator">
-        {Array.from(new Array(visibleSlides)).map((_, i) => (
+        {/* {Array.from(new Array(visibleSlides)).map((_, i) => ( */}
+        {slides.map((_, i) => (
           <div
             key={i}
             className={`carousel-indicator__dot ${index === i ? 'active' : ''}`}
+            onClick={() => scrollTo(i)}
           />
         ))}
       </div>
@@ -131,17 +132,29 @@ Thumbnails.play = async ({ args, canvasElement }) => {
     ).toBeDefined()
   );
 
-  await expect(args.onChange).toHaveBeenCalled();
+  expect(args.onChange).toHaveBeenCalled();
 };
 
-export const WithPadding = Template.bind({});
-WithPadding.args = {
+export const WithPaddingParent = Template.bind({});
+WithPaddingParent.args = {
   className: 'with-padding',
   onChange: () => {},
 };
 
-export const WithPaddingChild = Template.bind({});
-WithPaddingChild.args = {
+export const WithPaddingPseudoElement = Template.bind({});
+WithPaddingPseudoElement.args = {
   className: 'with-padding-child',
+  onChange: () => {},
+};
+
+export const WithAlignStart = Template.bind({});
+WithAlignStart.args = {
+  className: 'with-align-start',
+  onChange: () => {},
+};
+
+export const WithAlignEnd = Template.bind({});
+WithAlignEnd.args = {
+  className: 'with-align-end',
   onChange: () => {},
 };

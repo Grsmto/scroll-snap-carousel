@@ -13,6 +13,7 @@ import './SnapCarousel.css';
 import { Chevron } from './icons/Chevron';
 
 const Carousel = ({ className }) => {
+  const testRef = React.useRef();
   const state = useSnapCarousel();
   let slidesLength = 10;
   let slides = [];
@@ -24,7 +25,7 @@ const Carousel = ({ className }) => {
   return (
     <div className={`SnapCarousel-story ${className}`}>
       <div className="carousel">
-        <SnapCarousel state={state} defaultIndex={9}>
+        <SnapCarousel state={state} defaultIndex={9} ref={testRef}>
           {slides.map((slide) => (
             <div className="slide" key={slide}>
               {slide}

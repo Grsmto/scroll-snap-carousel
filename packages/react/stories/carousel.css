@@ -60,9 +60,18 @@
 
 .carousel-story.with-padding .carousel-container {
   padding-left: 300px;
-  scroll-padding-left: 300px;
+  padding-right: 300px;
 }
 
-.carousel-story.with-padding-child .carousel-container .slide:first-child {
+.carousel-story.with-padding-child .carousel-container:before {
+  content: '';
   padding-left: 300px;
+}
+
+.carousel-story.with-align-start .carousel-container .slide {
+  scroll-snap-align: start;
+}
+
+.carousel-story.with-align-end .carousel-container .slide {
+  scroll-snap-align: end;
 }

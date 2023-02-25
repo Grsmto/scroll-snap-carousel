@@ -8,15 +8,16 @@ import { PolymorphicRef, useMergedRefs } from './utils';
 
 type State = ReturnType<typeof useSnapCarousel>;
 
-type Props<T extends ElementType> = {
+interface Props<T extends ElementType> {
   children?: React.ReactNode;
   className?: string;
   tag?: T;
   index?: number;
   defaultIndex?: number;
   onIndexChange?: (index: number) => void;
+  onScrollEnd?: () => void;
   state?: State;
-};
+}
 
 export const useSnapCarousel = () => {
   const elRef = useRef<any>(null);
@@ -36,6 +37,7 @@ export const SnapCarousel = React.forwardRef(
       index,
       defaultIndex,
       onIndexChange,
+      onScrollEnd,
       className,
       state,
       ...otherProps
@@ -45,7 +47,7 @@ export const SnapCarousel = React.forwardRef(
     const RootTag = tag || 'div';
     const elRef = state?.elRef || useRef<any>(null);
     const mergedRef = useMergedRefs([elRef, ref]);
-    const scrollTo = useScroll({ ref: elRef });
+    const scrollTo = useScroll({ ref: elRef, onScrollEnd });
     const activeIndex = useActiveSnap({ ref: elRef });
 
     useDragToScroll({ ref: elRef });

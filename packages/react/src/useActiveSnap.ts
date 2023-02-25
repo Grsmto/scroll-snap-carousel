@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useCallback, useState } from 'react';
-import { getActiveSnap } from '@snap-carousel/core';
+import { ActiveSnap } from '@snap-carousel/core';
 
 export const useActiveSnap = ({
   ref,
@@ -16,7 +16,7 @@ export const useActiveSnap = ({
   useEffect(() => {
     if (!ref.current) return;
 
-    const { destroy } = getActiveSnap({
+    const { destroy } = new ActiveSnap({
       root: ref.current,
       onChange: handleActiveSnapChange,
     });
