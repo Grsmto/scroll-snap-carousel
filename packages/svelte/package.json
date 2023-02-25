@@ -17,7 +17,6 @@
     "@snap-carousel/core": "^0.0.18-next.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.25.0",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
     "@sveltejs/package": "next",

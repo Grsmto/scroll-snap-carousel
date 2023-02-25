@@ -1,8 +1,6 @@
 <script lang="ts">
   import {
     dragToScroll as _dragToScroll,
-    getActiveSnap,
-    scrollTo,
   } from '@snap-carousel/core';
   import { carousel } from '.'
 

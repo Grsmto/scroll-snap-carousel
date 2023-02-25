@@ -1,6 +1,6 @@
 import {
   dragToScroll as _dragToScroll,
-  getActiveSnap,
+  ActiveSnap,
   scrollTo,
 } from '@snap-carousel/core';
 import SnapCarousel from './SnapCarousel.svelte';
@@ -11,13 +11,13 @@ export const carousel = (node: HTMLDivElement, options = {}) => {
 
   if (_options.dragToScroll) dragToScroll = _dragToScroll({ root: node });
 
-  const activeSnap = getActiveSnap({
+  const activeSnap = new ActiveSnap({
     root: node,
     onChange: _options.onIndexChange,
   });
 
   return {
-    getActiveIndex: activeSnap.getActiveIndex,
+    getActiveIndex: activeSnap.activeSnapIndex,
     destroy() {
       if (_options.dragToScroll) dragToScroll.disable();
       activeSnap.destroy();
