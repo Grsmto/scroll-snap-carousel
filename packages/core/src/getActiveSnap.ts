@@ -1,108 +1,124 @@
-import { debounceHOF } from './utils';
+import { debounceHOF, getStyles } from './utils';
 
-export const getActiveSnap = ({
-  root,
-  onChange,
-}: {
-  root: HTMLDivElement;
+export class ActiveSnap {
+  activeSnapObserver: IntersectionObserver | null = null;
+  onResizeWithDebounce: () => void;
+  activeSnapIndex = 0;
+  observers = new WeakMap();
+  root: HTMLElement;
+  children: HTMLCollection;
+  firstChild: HTMLElement;
   onChange?: (snapIndex: number) => void;
-}) => {
-  let activeSnapObserver: IntersectionObserver;
-  let activeSnapIndex = 0;
-  let observers = new WeakMap();
 
-  const children = root.children;
-  const firstChild = root.children[0] as HTMLElement;
+  constructor({
+    root,
+    onChange,
+  }: {
+    root: HTMLElement;
+    onChange?: (snapIndex: number) => void;
+  }) {
+    this.root = root;
+    this.children = root.children;
+    this.firstChild = root.children[0] as HTMLElement;
+    this.onChange = onChange;
 
-  const triggerChange = (snapIndex: number) => {
-    if (root.classList.contains('scrolling')) return;
+    this.onResizeWithDebounce = debounceHOF(this.onResize, 100);
 
-    onChange && onChange(snapIndex);
-    root.dispatchEvent(
+    this.init();
+  }
+
+  triggerChange = (snapIndex: number) => {
+    this.onChange && this.onChange(snapIndex);
+    this.root.dispatchEvent(
       new CustomEvent('snap-change', {
         detail: { snapIndex },
       })
     );
   };
 
-  const destroy = () => {
-    activeSnapObserver.disconnect();
-    window.removeEventListener('resize', onResizeWithDebounce);
-    Array.from(root.children).forEach((child) => {
-      if (observers.has(child)) {
-        observers.get(child).disconnect();
+  destroy = () => {
+    this.activeSnapObserver?.disconnect();
+    window.removeEventListener('resize', this.onResizeWithDebounce);
+    Array.from(this.root.children).forEach((child) => {
+      if (this.observers.has(child)) {
+        this.observers.get(child).disconnect();
       }
     });
-    observers = new WeakMap();
+    this.observers = new WeakMap();
   };
 
-  const setSnapIndex = (snapIndex: number) => {
-    activeSnapIndex = snapIndex;
-    triggerChange(snapIndex);
+  setSnapIndex = (snapIndex: number) => {
+    this.activeSnapIndex = snapIndex;
+    this.triggerChange(snapIndex);
   };
 
-  const onResize = () => {
-    destroy();
-    init();
+  onResize = () => {
+    this.destroy();
+    this.init();
   };
 
-  const onResizeWithDebounce = debounceHOF(onResize, 100);
-
-  const handleScrolling = () => {
-    if (timeout) clearTimeout(timeout);
-
-    timeout = setTimeout(() => {
-      if (root.scrollLeft === 0) {
-        setSnapIndex(0);
-      }
-    }, 50) as any;
-  };
-
-  const init = () => {
-    const $viewport: HTMLElement = root;
+  init = () => {
+    const $viewport: HTMLElement = this.root;
     const viewportWidth = $viewport.offsetWidth;
 
-    activeSnapIndex = 0;
+    this.activeSnapIndex = 0;
 
-    activeSnapObserver = new IntersectionObserver(
+    if (typeof IntersectionObserver === 'undefined') {
+      return console.warn(
+        'SnapCarousel: IntersectionObserver is not supported'
+      );
+    }
+
+    this.activeSnapObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const styles = window.getComputedStyle(
               entry.target
             ) as CSSStyleDeclaration;
-            if (observers.has(entry.target)) return;
+            if (this.observers.has(entry.target)) return;
 
             const observer = getObserver(styles.scrollSnapAlign);
             observer.observe(entry.target);
-            observers.set(entry.target, observer);
+            this.observers.set(entry.target, observer);
           } else {
-            if (observers.has(entry.target)) {
-              observers.get(entry.target).disconnect();
-              observers.delete(entry.target);
+            if (this.observers.has(entry.target)) {
+              this.observers.get(entry.target).disconnect();
+              this.observers.delete(entry.target);
             }
           }
         });
       },
       {
-        root,
+        root: this.root,
         rootMargin: `0px 0px`,
         threshold: [0.5],
       }
     );
 
     const getObserver = (snapAlign: string) => {
+      const viewportStyles = getStyles($viewport, [
+        'paddingLeft',
+        'paddingRight',
+      ]);
+      const firstChildStyles = getStyles(this.firstChild, ['marginLeft']);
+
+      if (viewportStyles.paddingLeft || viewportStyles.paddingRight)
+        console.warn(
+          'SnapCarousel: horizontal padding on container is not supported by getActiveSnap.'
+        );
+
       switch (snapAlign) {
         case 'start':
           return new IntersectionObserver(
             (entries) => {
               entries.forEach((entry) => {
-                console.log('active snap: ', entry);
+                // console.log('active snap: ', entry);
 
-                if (activeSnapIndex === null || !entry.rootBounds) return;
+                if (this.activeSnapIndex === null || !entry.rootBounds) return;
 
                 const entryIndex = Array.prototype.indexOf.call(
-                  children,
+                  this.children,
                   entry.target
                 );
 
@@ -110,7 +126,7 @@ export const getActiveSnap = ({
                   entry.isIntersecting &&
                   entry.boundingClientRect.right > 0
                 ) {
-                  setSnapIndex(entryIndex + 1);
+                  this.setSnapIndex(entryIndex + 1);
                   return;
                 }
 
@@ -119,13 +135,13 @@ export const getActiveSnap = ({
                   entry.intersectionRatio > 0 &&
                   entry.boundingClientRect.right - entry.rootBounds.right > 0
                 ) {
-                  setSnapIndex(entryIndex);
+                  this.setSnapIndex(entryIndex);
                   return;
                 }
               });
             },
             {
-              root,
+              root: this.root,
               rootMargin: `0px -100% 0px 50%`,
               threshold: [0.5],
             }
@@ -136,10 +152,10 @@ export const getActiveSnap = ({
               entries.forEach((entry) => {
                 // console.log('active snap: ', entry);
 
-                if (activeSnapIndex === null) return;
+                if (this.activeSnapIndex === null) return;
 
                 const entryIndex = Array.prototype.indexOf.call(
-                  children,
+                  this.children,
                   entry.target
                 );
 
@@ -147,7 +163,7 @@ export const getActiveSnap = ({
                   entry.isIntersecting &&
                   entry.boundingClientRect.left < viewportWidth
                 ) {
-                  setSnapIndex(entryIndex - 1);
+                  this.setSnapIndex(entryIndex - 1);
                   return;
                 }
 
@@ -156,13 +172,13 @@ export const getActiveSnap = ({
                   entry.intersectionRatio > 0 &&
                   entry.boundingClientRect.left < viewportWidth
                 ) {
-                  setSnapIndex(entryIndex);
+                  this.setSnapIndex(entryIndex);
                   return;
                 }
               });
             },
             {
-              root,
+              root: this.root,
               rootMargin: `0px 50% 0px -100%`,
               threshold: [0.5],
             }
@@ -174,7 +190,7 @@ export const getActiveSnap = ({
               entries.forEach((entry) => {
                 // console.log('active snap: ', entry);
 
-                if (activeSnapIndex === null || !entry.rootBounds) return;
+                if (this.activeSnapIndex === null || !entry.rootBounds) return;
 
                 if (
                   entry.boundingClientRect.left <=
@@ -184,18 +200,32 @@ export const getActiveSnap = ({
                     entry.rootBounds.left +
                       entry.boundingClientRect.width * 0.01
                 ) {
+                  // If first child is snapping left
+                  if (
+                    Math.abs(
+                      entry.rootBounds.left -
+                        (entry.boundingClientRect.left +
+                          entry.boundingClientRect.width / 2)
+                    ) >
+                    this.firstChild.offsetLeft -
+                      firstChildStyles.marginLeft +
+                      this.root.scrollLeft
+                  ) {
+                    return;
+                  }
+
                   const entryIndex = Array.prototype.indexOf.call(
-                    children,
+                    this.children,
                     entry.target
                   );
-
-                  setSnapIndex(entryIndex);
+                  // console.log(entryIndex);
+                  this.setSnapIndex(entryIndex);
                   return;
                 }
               });
             },
             {
-              root,
+              root: this.root,
               rootMargin: `0px 0px 0px -50%`,
               threshold: [0.49, 0.51],
             }
@@ -203,21 +233,12 @@ export const getActiveSnap = ({
       }
     };
 
-    root.addEventListener('scroll', handleScrolling);
+    // root.addEventListener('scroll', handleScrolling);
 
-    Array.from(root.children).forEach((child) => {
-      activeSnapObserver.observe(child);
+    Array.from(this.root.children).forEach((child) => {
+      this.activeSnapObserver?.observe(child);
     });
 
-    window.addEventListener('resize', onResizeWithDebounce);
+    window.addEventListener('resize', this.onResizeWithDebounce);
   };
-
-  init();
-
-  return {
-    destroy,
-    getActiveIndex: () => {
-      return activeSnapIndex;
-    },
-  };
-};
+}
