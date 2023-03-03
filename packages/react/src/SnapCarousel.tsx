@@ -123,6 +123,9 @@ export const SnapCarouselIndicator = React.forwardRef(
         }`}
         ref={ref}
         onClick={handleClick}
+        aria-label={`Go to slide ${index + 1}`}
+        aria-selected={index === _activeIndex ? 'true' : 'false'}
+        type={RootTag === 'button' ? 'button' : undefined}
         {...otherProps}
       />
     );
