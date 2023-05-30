@@ -1,0 +1,26 @@
+{
+  "name": "@snap-carousel/examples",
+  "version": "0.0.16",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@snap-carousel/core": "^0.0.17",
+    "@snap-carousel/react": "^0.0.18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.3",
+    "vite-plugin-html": "^3.2.2"
+  }
+}

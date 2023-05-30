@@ -1,7 +1,6 @@
 {
   "version": "independent",
-  "npmClient": "yarn",
-  "useWorkspaces": true,
+  "npmClient": "pnpm",
   "ignoreChanges": ["**/demo/**", "**/*.md"],
   "publish": {
     "registry": "https://npm.pkg.github.com"

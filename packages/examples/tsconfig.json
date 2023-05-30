@@ -7,8 +7,10 @@
     "jsx": "react",
     "outDir": "./dist",
     "declaration": true,
-    "declarationDir": "./dist"
+    "declarationDir": "."
   },
-  "include": ["src/**/*"],
-  "exclude": ["__snapshots__/**/*"]
+  "include": ["src/*"],
+  "exclude": ["dist"],
+  "compileOnSave": false,
+  "buildOnSave": false
 }
