@@ -1,6 +1,6 @@
 {
   "name": "@snap-carousel/svelte",
-  "version": "0.0.17-next.2",
+  "version": "0.0.18-next.0",
   "publishConfig": {
     "access": "public"
   },
