@@ -17,7 +17,7 @@ export const carousel = (node: HTMLDivElement, options = {}) => {
   });
 
   return {
-    getActiveIndex: activeSnap.activeSnapIndex,
+    getActiveIndex: () => activeSnap.activeSnapIndex,
     destroy() {
       if (_options.dragToScroll) dragToScroll.disable();
       activeSnap.destroy();
