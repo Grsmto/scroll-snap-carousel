@@ -15,7 +15,6 @@
   "scripts": {
     "build": "tsup",
     "start": "tsup --watch",
-    "test": "jest",
     "storybook": "storybook dev --port 6006",
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook"
