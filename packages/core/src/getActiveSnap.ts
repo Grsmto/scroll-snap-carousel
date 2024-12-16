@@ -83,8 +83,11 @@ export class ActiveSnap {
             this.observers.set(entry.target, observer);
           } else {
             if (this.observers.has(entry.target)) {
-              this.observers.get(entry.target).disconnect();
-              this.observers.delete(entry.target);
+              // wait for all observers to trigger before cleaning up
+              setTimeout(() => {
+                this.observers.get(entry.target).disconnect();
+                this.observers.delete(entry.target);
+              }, 0);
             }
           }
         });
