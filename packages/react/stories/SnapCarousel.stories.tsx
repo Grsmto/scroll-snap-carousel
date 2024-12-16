@@ -5,8 +5,8 @@ import {
   SnapCarouselIndicator,
   SnapCarouselNavPrev,
   SnapCarouselNavNext,
-} from '@snap-carousel/react';
-import '@snap-carousel/react/src/styles.css';
+} from '../src';
+import '../src/styles.css';
 
 import './SnapCarousel.css';
 

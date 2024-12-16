@@ -6,8 +6,8 @@ import {
   useDragToScroll,
   useScroll,
   useActiveSnap,
-} from '@snap-carousel/react';
-import '@snap-carousel/react/dist/styles.css';
+} from '../src';
+import '../src/styles.css';
 import { Chevron } from './icons/Chevron';
 
 import './carousel.css';
