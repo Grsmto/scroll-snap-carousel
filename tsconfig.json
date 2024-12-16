@@ -16,6 +16,5 @@
     "module": "es6",
     "target": "es2017"
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
   "exclude": ["node_modules/**"]
 }
