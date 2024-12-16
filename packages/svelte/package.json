@@ -1,31 +1,35 @@
 {
   "name": "@snap-carousel/svelte",
-  "version": "0.0.12",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
+  "version": "0.0.19-next.0",
   "license": "MIT",
-  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "directory": "package"
+  },
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c -w"
+    "dev": "vite dev",
+    "build": "svelte-kit sync && svelte-package",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@snap-carousel/core": "^0.0.17"
-  },
-  "peerDependencies": {
-    "svelte": ">=3.0.0"
+    "@snap-carousel/core": "workspace:*"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.1",
-    "@rollup/plugin-node-resolve": "^15.3.0",
-    "@rollup/plugin-typescript": "^12.1.1",
-    "@types/react": "^16.9.41",
-    "@types/react-dom": "^16.9.8",
-    "@typescript-eslint/eslint-plugin": "^3.2.0",
-    "@typescript-eslint/parser": "^3.2.0",
-    "rollup": "^4.28.1",
-    "rollup-plugin-peer-deps-external": "^2.2.2",
-    "svelte": "^3.23.2"
-  }
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/kit": "next",
+    "@sveltejs/package": "next",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.16.0",
+    "eslint-plugin-svelte3": "^4.0.0",
+    "svelte": "^3.44.0",
+    "svelte-check": "^2.7.1",
+    "svelte-preprocess": "^4.10.6",
+    "tslib": "^2.3.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.1.0"
+  },
+  "type": "module"
 }
