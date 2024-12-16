@@ -2,6 +2,66 @@
 
 #### 🐛 Bug Fix
 
+- Update CHANGELOG.md \[skip ci\] (adrien.denat@qatalog.com)
+- Bump independent versions \[skip ci\] (adrien.denat@qatalog.com)
+
+#### ⚠️ Pushed to `main`
+
+- remove test setup until we have tests (adrien.denat@qatalog.com)
+- Merge branch 'next' ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- fix(core): fix observer being cleaned up before triggering ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- chore(core|react): migrate to pnpm + tsup ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- update to Vite ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- Update versions (adrien.denat@qatalog.com)
+- feat(core): add onScrollEnd callback to scrollTo function (adrien.denat@qatalog.com)
+- chore(core): active snap is now a class (adrien.denat@qatalog.com)
+- fix(core): fix getActiveSnap intersection observers leak (adrien.denat@qatalog.com)
+- chore: update READMEs (adrien.denat@qatalog.com)
+- feat(react): add new components SnapCarouselIndicator SnapCarouselNavPrev SnapCarouselNavNext (adrien.denat@qatalog.com)
+- feat(core): add get function to retrieve active index (adrien.denat@qatalog.com)
+- chore(docs): add example for carousel with padding (adrien.denat@qatalog.com)
+- feat(core): improve scrollTo animation when it's a partial move (adrien.denat@qatalog.com)
+- feat(core): rework active snap observers to compute snap-align per item instead of globally (adrien.denat@qatalog.com)
+- feat(core): add support for padding/scroll-padding on container (adrien.denat@qatalog.com)
+- chore(core): remove padding from alignment calculations (adrien.denat@qatalog.com)
+- feat(core|react): do not return index from scrollTo function anymore (adrien.denat@qatalog.com)
+- feat(core): snapAlign is now defined by an option instead of checking the CSS (adrien.denat@qatalog.com)
+- fix(core): add exception when dragging to last carousel item to stick to it (adrien.denat@qatalog.com)
+- chore: dependencies updates (adrien.denat@qatalog.com)
+- feat(core): add support for swipe (adrien.denat@qatalog.com)
+- fix(core): take into account item snapAlign to calculation items position (adrien.denat@qatalog.com)
+- Merge branch 'main' into next (adrien.denat@qatalog.com)
+- chore: cleanup changelogs (adrien.denat@qatalog.com)
+- fix(core): fix drag class not removed properly + rename .snaplist_drag class to .scrolling (adrien.denat@qatalog.com)
+- chore: add repository field to package.json (adrien.denat@qatalog.com)
+- chore: set packages publish config (adrien.denat@qatalog.com)
+- Merge branch 'develop' (adrien.denat@qatalog.com)
+- feat(core): make duration of scroll configurable + better handling of drag/scroll conflicts (adrien.denat@qatalog.com)
+- chore: refactor types after TS upgrade (adrien.denat@qatalog.com)
+- chore: refactor Rollup TS compilation (adrien.denat@qatalog.com)
+- chore: remove attempt of using web-components for now (adrien.denat@qatalog.com)
+- chore: remove hack for compiling TS types and use recommended workaround for Rollup instead (adrien.denat@qatalog.com)
+- chore: upgrade rollup + typescript plugin (adrien.denat@qatalog.com)
+- chore(core): rework smoothScroll detection support (adrien.denat@qatalog.com)
+- fix(core): fix calculation for active snap (adrien.denat@qatalog.com)
+- fix(core): remove normalizing of values that blocks carousel from going to first/last slide in certain conditions (adrien.denat@qatalog.com)
+- bump versions (adrien.denat@qatalog.com)
+- fix(core): fix a bug where snaplist_drag class is never removed (adrien.denat@qatalog.com)
+- chore: add base component file (adrien.denat@qatalog.com)
+- chore: rename package to @snap-carousel (adrien.denat@qatalog.com)
+- chore(core): add stencil components (adrien.denat@qatalog.com)
+
+#### Authors: 2
+
+- Adrien ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
+# v0.0.19 (Mon Dec 16 2024)
+
+#### 🐛 Bug Fix
+
 - Bump independent versions \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
 - Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
 
