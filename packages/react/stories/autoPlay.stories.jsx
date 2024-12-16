@@ -1,6 +1,6 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { SnapCarousel } from '@snap-carousel/react';
-import '@snap-carousel/react/src/styles.css';
+import { SnapCarousel } from '../src';
+import '../src/styles.css';
 
 import './SnapCarousel.css';
 
