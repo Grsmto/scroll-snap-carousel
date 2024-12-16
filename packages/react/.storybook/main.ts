@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/react-webpack5';
+import { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
   stories: [
@@ -11,21 +11,11 @@ const config: StorybookConfig = {
   ],
   typescript: {
     check: true,
-    checkOptions: {},
     reactDocgenTypescriptOptions: {
       propFilter: (prop) => ['label', 'disabled'].includes(prop.name),
     },
   },
-  framework: "@storybook/react-webpack5",
-  features: {
-    postcss: false,
-    storyStoreV7: !global.navigator?.userAgent?.match?.('jsdom'),
-    buildStoriesJson: true,
-    babelModeV7: true,
-    warnOnLegacyHierarchySeparator: false,
-    // previewMdx2: true,
-    breakingChangesV7: true,
-  },
+  framework: '@storybook/react-vite',
 }
 
 module.exports = config;
