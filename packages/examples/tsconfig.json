@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "removeComments": false,
+    "sourceMap": true,
+    "inlineSources": true,
+    "jsx": "react",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "."
+  },
+  "include": ["src/*"],
+  "exclude": ["dist"],
+  "compileOnSave": false,
+  "buildOnSave": false
+}

@@ -1,6 +1,6 @@
 {
   "name": "@snap-carousel/react",
-  "version": "0.0.21-next.3",
+  "version": "0.0.21",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "jsnext:main": "dist/index.js",
@@ -15,7 +15,6 @@
   "scripts": {
     "build": "tsup",
     "start": "tsup --watch",
-    "test": "jest",
     "storybook": "storybook dev --port 6006",
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook"

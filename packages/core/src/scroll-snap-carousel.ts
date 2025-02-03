@@ -3,7 +3,7 @@ import { scrollTo, dragToScroll as _dragToScroll } from './';
 export default class ScrollSnapCarousel {
   constructor(
     root: HTMLDivElement,
-    { dragToScroll = true }: { dragToScroll?: boolean }
+    { dragToScroll = true }: { dragToScroll?: boolean } = {}
   ) {
     this.el = root;
     this.scrollTo = (index) => scrollTo({ root, index });

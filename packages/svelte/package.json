@@ -1,6 +1,6 @@
 {
   "name": "@snap-carousel/svelte",
-  "version": "0.0.19-next.0",
+  "version": "0.0.19",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
@@ -14,7 +14,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@snap-carousel/core": "^0.0.19-next.4"
+    "@snap-carousel/core": "workspace:*"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
