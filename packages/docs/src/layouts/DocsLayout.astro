@@ -1,0 +1,41 @@
+---
+import '../styles/docs.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description || 'scroll-snap-carousel documentation'} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} | scroll-snap-carousel</title>
+  </head>
+  <body class="min-h-screen bg-white text-gray-900">
+    <nav class="fixed top-0 w-full bg-white border-b border-gray-200 z-50">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <a href="/" class="text-xl font-bold">scroll-snap-carousel</a>
+          <div class="flex gap-4">
+            <a href="/docs" class="hover:text-blue-600">Docs</a>
+            <a href="/examples" class="hover:text-blue-600">Examples</a>
+            <a href="https://github.com/yourusername/scroll-snap-carousel" class="hover:text-blue-600">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto px-4 pt-20">
+      <main class="max-w-4xl mx-auto py-8">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

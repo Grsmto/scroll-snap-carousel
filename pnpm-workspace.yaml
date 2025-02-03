@@ -2,3 +2,4 @@ packages:
   - 'packages/react'
   - 'packages/core'
   - 'packages/svelte'
+  - 'packages/docs'

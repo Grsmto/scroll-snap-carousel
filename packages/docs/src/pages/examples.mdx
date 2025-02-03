@@ -1,0 +1,95 @@
+---
+layout: ../layouts/DocsLayout.astro
+title: Examples
+---
+import { CarouselExample } from '../components/CarouselExample';
+import { BasicCarousel } from '../components/examples/BasicCarousel';
+import { HookBasedCarousel } from '../components/examples/HookBasedCarousel';
+
+# Interactive Examples
+
+## Basic Usage
+
+### Simple Image Carousel
+
+<CarouselExample
+  title="Basic Image Carousel"
+  code={`
+import { SnapCarousel } from '@snap-carousel/react';
+import '@snap-carousel/react/dist/styles.css';
+
+function ImageCarousel() {
+  const images = [
+    'https://picsum.photos/id/1018/600/400',
+    'https://picsum.photos/id/1015/600/400',
+    'https://picsum.photos/id/1019/600/400'
+  ];
+
+  return (
+    <SnapCarousel>
+      {images.map((src, index) => (
+        <div key={index} className="w-full flex-shrink-0">
+          <img
+            src={src}
+            alt={\`Slide \${index + 1}\`}
+            className="w-full h-64 object-cover rounded-lg"
+          />
+        </div>
+      ))}
+    </SnapCarousel>
+  );
+}`}>
+  <BasicCarousel />
+</CarouselExample>
+
+### Hook-based Card Carousel
+
+<CarouselExample
+  title="Hook-based Card Carousel"
+  code={`
+import React, { useRef } from 'react';
+import { useDragToScroll } from '@snap-carousel/react';
+import '@snap-carousel/core/dist/styles.css';
+
+function CardCarousel() {
+  const ref = useRef();
+  useDragToScroll({ ref });
+
+  return (
+    <div 
+      ref={ref}
+      className="flex overflow-x-auto snap-x snap-mandatory w-full gap-4"
+      style={{ scrollSnapType: 'x mandatory' }}
+    >
+      {cards.map((card, index) => (
+        <div
+          key={index}
+          className="flex-shrink-0 w-80 snap-start bg-white p-6 rounded-lg shadow-md"
+        >
+          <h3 className="text-xl font-bold mb-2">{card.title}</h3>
+          <p className="text-gray-600">{card.content}</p>
+        </div>
+      ))}
+    </div>
+  );
+}`}>
+  <HookBasedCarousel />
+</CarouselExample>
+
+## Implementation Details
+
+Each example above demonstrates different aspects of the @snap-carousel/react library:
+
+1. **Basic Image Carousel**
+   - Uses the `SnapCarousel` component
+   - Demonstrates basic image sliding functionality
+   - Shows proper image sizing and containment
+
+2. **Hook-based Card Carousel**
+   - Uses the `useDragToScroll` hook
+   - Shows custom card layout
+   - Demonstrates manual scroll snap implementation
+
+The examples are fully interactive - try dragging the slides or using touch gestures on mobile devices.
+
+For more examples and detailed implementation guides, check out the [documentation](/docs).

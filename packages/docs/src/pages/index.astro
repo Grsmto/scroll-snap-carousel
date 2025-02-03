@@ -1,5 +1,34 @@
-<script is:inline>
-	// Redirect your homepage to the first page of documentation.
-	// If you have a landing page, remove this script and add it here!
-	window.location.pathname = `/en/introduction`;
-</script>
+---
+import DocsLayout from '../layouts/DocsLayout.astro';
+---
+
+<DocsLayout title="Home">
+  <div class="text-center">
+    <h1>scroll-snap-carousel</h1>
+    <p class="text-xl mb-8">A modern, lightweight carousel component powered by CSS scroll-snap</p>
+    
+    <div class="flex gap-4 justify-center mb-12">
+      <a href="/docs" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+        Get Started
+      </a>
+      <a href="/examples" class="border border-gray-300 px-6 py-2 rounded-lg hover:bg-gray-50">
+        View Examples
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+      <div>
+        <h3>Lightweight</h3>
+        <p>Zero dependencies, minimal JavaScript, powered by native scroll-snap</p>
+      </div>
+      <div>
+        <h3>Responsive</h3>
+        <p>Works seamlessly across all devices and screen sizes</p>
+      </div>
+      <div>
+        <h3>Accessible</h3>
+        <p>Built with accessibility in mind, following WCAG guidelines</p>
+      </div>
+    </div>
+  </div>
+</DocsLayout>

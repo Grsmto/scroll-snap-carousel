@@ -1,11 +1,3 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "esModuleInterop": true,
-    "jsx": "preserve",
-    "skipLibCheck": true,
-  },
-  "include": ["src/*", ".storybook/main.ts"]
+  "extends": "astro/tsconfigs/base"
 }

@@ -9,3 +9,6 @@ yarn-error.log
 yalc.lock
 .yalc
 storybook-static
+
+# Local Netlify folder
+.netlify

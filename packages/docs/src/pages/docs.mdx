@@ -1,0 +1,160 @@
+---
+layout: ../layouts/DocsLayout.astro
+title: Documentation
+---
+
+# Snap Carousel React Documentation
+
+## Installation
+
+```bash
+# npm
+npm install @snap-carousel/react --save
+
+# yarn
+yarn add @snap-carousel/react
+```
+
+## Basic Usage
+
+### Component API
+
+The simplest way to use Snap Carousel is with the `SnapCarousel` component:
+
+```jsx
+import { SnapCarousel } from '@snap-carousel/react';
+import '@snap-carousel/react/dist/styles.css';
+
+function MyCarousel() {
+  const slides = ['Slide 1', 'Slide 2', 'Slide 3'];
+
+  return (
+    <SnapCarousel>
+      {slides.map((slide) => (
+        <div className="slide" key={slide}>
+          {slide}
+        </div>
+      ))}
+    </SnapCarousel>
+  );
+}
+```
+
+### Hook-based API
+
+For more control, you can use the hooks directly:
+
+```jsx
+import {
+  useDragToScroll,
+  useScroll,
+  useActiveSnap
+} from '@snap-carousel/react';
+import '@snap-carousel/core/dist/styles.css';
+
+function CustomCarousel() {
+  const ref = React.useRef();
+  useDragToScroll({ ref });
+
+  const slides = ['Slide 1', 'Slide 2', 'Slide 3'];
+
+  return (
+    <div ref={ref}>
+      {slides.map((slide) => (
+        <div key={slide}>
+          {slide}
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## Available Hooks
+
+### useDragToScroll
+
+Enables drag-to-scroll functionality on any scrollable container.
+
+```jsx
+const ref = useRef();
+useDragToScroll({ ref });
+```
+
+### useScroll
+
+Provides scroll position and scroll events handling.
+
+```jsx
+const { scrollLeft, scrollTop, isScrolling } = useScroll({ ref });
+```
+
+### useActiveSnap
+
+Tracks the currently active (snapped) slide.
+
+```jsx
+const { activeIndex, snapTo } = useActiveSnap({ ref });
+```
+
+## Important Notes
+
+1. **CSS Import Required**
+   Don't forget to import the required CSS files:
+   ```jsx
+   import '@snap-carousel/react/dist/styles.css';
+   // or for hooks-only usage:
+   import '@snap-carousel/core/dist/styles.css';
+   ```
+
+2. **TypeScript Support**
+   The library includes TypeScript definitions out of the box.
+
+3. **Browser Support**
+   Requires browsers with CSS Scroll Snap support:
+   - Chrome 69+
+   - Firefox 68+
+   - Safari 11+
+   - Edge 79+
+
+## Advanced Usage
+
+For more advanced usage examples and configurations, check out our [examples page](/examples) or visit our [Storybook documentation](https://github.com/yourusername/scroll-snap-carousel/blob/master/packages/docs/stories).
+
+## Best Practices
+
+1. **Performance**
+   - Use `will-change: transform` sparingly
+   - Implement virtualization for large lists
+   - Optimize images and other content
+
+2. **Accessibility**
+   - Include proper ARIA labels
+   - Ensure keyboard navigation works
+   - Provide visible focus indicators
+
+3. **Mobile Considerations**
+   - Test touch interactions
+   - Consider viewport sizes
+   - Implement proper touch targets
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Scroll Snapping Not Working**
+   - Ensure CSS is properly imported
+   - Check container dimensions
+   - Verify scroll-snap CSS properties
+
+2. **Performance Issues**
+   - Reduce number of slides
+   - Optimize slide content
+   - Check for layout thrashing
+
+3. **Mobile Issues**
+   - Test with different touch events
+   - Verify viewport meta tags
+   - Check touch-action CSS property
+
+For more detailed examples and implementation guides, visit our [examples page](/examples).

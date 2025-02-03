@@ -10,7 +10,11 @@
     "build": "lerna run build",
     "test": "lerna run test",
     "release": "lerna run build && lerna run test && auto shipit",
-    "dev": "lerna run --parallel --scope @snap-carousel/core --scope @snap-carousel/react --scope @snap-carousel/svelte start"
+    "dev": "lerna run --parallel --scope @snap-carousel/core --scope @snap-carousel/react --scope @snap-carousel/svelte start",
+    "build:docs": "cd packages/docs && pnpm build",
+    "build:storybook": "cd packages/react && pnpm build-storybook",
+    "predeploy": "pnpm build:docs && pnpm build:storybook",
+    "deploy": "netlify deploy --prod --dir=packages/docs/dist/ --dir=packages/react/storybook-static/=/storybook"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.18.0",
