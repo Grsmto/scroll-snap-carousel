@@ -5,6 +5,7 @@ export const { isTouchDevice } = utils;
 export { useDragToScroll } from './useDragToScroll';
 export { useScroll } from './useScroll';
 export { useActiveSnap } from './useActiveSnap';
+export { useScrollProgress } from './useScrollProgress';
 
 export {
   SnapCarousel,
