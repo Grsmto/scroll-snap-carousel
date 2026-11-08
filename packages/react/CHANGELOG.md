@@ -26,6 +26,30 @@
 
 #### 🐛 Bug Fix
 
+- Update CHANGELOG.md \[skip ci\] (oi@adriendenat.com)
+- feat(core): expose continuous scroll progress between snaps [#42](https://github.com/Grsmto/scroll-snap-carousel/pull/42) (oi@adriendenat.com)
+- fix(core): correct scroll progress between snaps (oi@adriendenat.com)
+- feat(core): expose continuous scroll progress between snaps (oi@adriendenat.com)
+- Merge branch 'main' into next (oi@adriendenat.com)
+- chore(react): upgrade storybook ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- chore(core|react): migrate to pnpm + tsup ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+
+#### ⚠️ Pushed to `main`
+
+- remove test setup until we have tests (oi@adriendenat.com)
+- chore(react): upgrade storybook (oi@adriendenat.com)
+
+#### Authors: 2
+
+- Adrien ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
+# v0.0.22 (Sun Nov 08 2026)
+
+#### 🐛 Bug Fix
+
 - feat(core): expose continuous scroll progress between snaps [#42](https://github.com/Grsmto/scroll-snap-carousel/pull/42) ([@Grsmto](https://github.com/Grsmto))
 - fix(core): correct scroll progress between snaps ([@Grsmto](https://github.com/Grsmto))
 - feat(core): expose continuous scroll progress between snaps ([@Grsmto](https://github.com/Grsmto))
