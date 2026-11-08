@@ -1,6 +1,50 @@
 import { mapItem, mapStyles } from './utils';
 import { smoothScroll } from './smoothScroll';
 
+export const getSnapTargetX = (
+  $viewport: HTMLElement,
+  element: HTMLElement
+): number => {
+  const elements = $viewport.children;
+  const firstElement = elements[0] as HTMLElement;
+  const viewportStyles = mapStyles($viewport);
+  const viewport = {
+    offsetLeft: $viewport.offsetLeft,
+    offsetTop: $viewport.offsetTop,
+    width: $viewport.offsetWidth,
+    paddingLeft: mapStyles(firstElement).paddingLeft,
+    paddingRight: mapStyles(elements[elements.length - 1]).paddingRight,
+    scrollPaddingLeft: viewportStyles.scrollPaddingLeft || 0,
+    scrollPaddingRight: viewportStyles.scrollPaddingRight || 0,
+    scrollWidth: $viewport.scrollWidth,
+  };
+
+  const item = mapItem({ element, viewport });
+
+  let left = 0;
+
+  switch (item.snapAlign) {
+    case 'start':
+      left = item.left - viewport.paddingLeft - viewport.scrollPaddingLeft;
+      break;
+    case 'end':
+      left =
+        item.left -
+        (viewport.width - item.width) +
+        viewport.paddingRight +
+        viewport.scrollPaddingRight;
+      break;
+    case 'center':
+      left =
+        item.left -
+        (viewport.width - item.width) / 2 -
+        viewport.scrollPaddingLeft / 2;
+      break;
+  }
+
+  return Math.min(Math.max(0, left), viewport.scrollWidth - viewport.width);
+};
+
 export const scrollTo = ({
   root,
   index,
@@ -54,13 +98,14 @@ export const scrollTo = ({
     };
 
     const item = mapItem({ element, viewport });
+    const left = getSnapTargetX($viewport, element);
 
-    let target = { left: 0, top: 0 };
+    let target = { left, top: 0 };
 
     switch (item.snapAlign) {
       case 'start':
         target = {
-          left: item.left - viewport.paddingLeft - viewport.scrollPaddingLeft,
+          left,
           top:
             item.top -
             item.paddingTop -
@@ -70,11 +115,7 @@ export const scrollTo = ({
         break;
       case 'end':
         target = {
-          left:
-            item.left -
-            (viewport.width - item.width) +
-            viewport.paddingRight +
-            viewport.scrollPaddingRight,
+          left,
           top:
             item.top -
             (viewport.height - item.height) +
@@ -84,10 +125,7 @@ export const scrollTo = ({
         break;
       case 'center':
         target = {
-          left:
-            item.left -
-            (viewport.width - item.width) / 2 -
-            viewport.scrollPaddingLeft / 2,
+          left,
           top:
             item.top -
             (viewport.height - item.height) / 2 -

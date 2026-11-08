@@ -1,0 +1,79 @@
+import { getSnapTargetX } from './scrollTo';
+import { debounceHOF } from './utils';
+
+export const getSnapPositionsX = (root: HTMLElement): number[] =>
+  Array.from(root.children).map((element) =>
+    getSnapTargetX(root, element as HTMLElement)
+  );
+
+export const getScrollProgress = (
+  scrollLeft: number,
+  positions: number[]
+): number => {
+  const lastIndex = positions.length - 1;
+
+  if (lastIndex < 1 || scrollLeft <= positions[0]) return 0;
+  if (scrollLeft >= positions[lastIndex]) return lastIndex;
+
+  for (let index = 0; index < lastIndex; index++) {
+    const start = positions[index];
+    const end = positions[index + 1];
+
+    if (scrollLeft <= end) {
+      return end === start
+        ? index + 1
+        : index + (scrollLeft - start) / (end - start);
+    }
+  }
+
+  return lastIndex;
+};
+
+export const observeScrollProgress = ({
+  root,
+  onProgress,
+}: {
+  root: HTMLElement;
+  onProgress: (progress: number) => void;
+}) => {
+  let positions = getSnapPositionsX(root);
+  let frame: number | null = null;
+  let disposed = false;
+
+  const update = () => {
+    if (frame !== null) cancelAnimationFrame(frame);
+    frame = null;
+    onProgress(getScrollProgress(root.scrollLeft, positions));
+  };
+
+  const onScroll = () => {
+    if (frame === null) frame = requestAnimationFrame(update);
+  };
+
+  const onResize = debounceHOF(() => {
+    if (disposed) return;
+    positions = getSnapPositionsX(root);
+    update();
+  }, 100);
+
+  root.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onResize);
+
+  const resizeObserver = new ResizeObserver(onResize);
+
+  resizeObserver.observe(root);
+  Array.from(root.children).forEach((slide) => {
+    resizeObserver.observe(slide);
+  });
+  update();
+
+  const destroy = () => {
+    disposed = true;
+    if (frame !== null) cancelAnimationFrame(frame);
+    root.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onResize);
+    resizeObserver.disconnect();
+  };
+
+  return { destroy };
+};

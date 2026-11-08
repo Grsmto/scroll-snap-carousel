@@ -14,7 +14,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "start": "tsup --watch"
+    "start": "tsup --watch",
+    "test": "jest"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.48.1",
