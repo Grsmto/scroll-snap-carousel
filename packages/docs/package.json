@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/mdx": "^4.0.8",
     "@astrojs/react": "^3.0.10",
+    "@snap-carousel/core": "latest",
     "@snap-carousel/react": "latest",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
