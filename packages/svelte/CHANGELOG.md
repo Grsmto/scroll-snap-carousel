@@ -1,3 +1,21 @@
+# v0.0.20 (Sun Nov 08 2026)
+
+#### 🐛 Bug Fix
+
+- Update CHANGELOG.md \[skip ci\] ([@Grsmto](https://github.com/Grsmto))
+- Merge branch 'main' into next ([@Grsmto](https://github.com/Grsmto))
+- Update versions ([@Grsmto](https://github.com/Grsmto))
+
+#### ⚠️ Pushed to `main`
+
+- fix: keep the Svelte package buildable and the docs site building ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 1
+
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # v0.0.19 (Mon Dec 16 2024)
 
 #### 🐛 Bug Fix

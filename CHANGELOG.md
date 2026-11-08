@@ -1,3 +1,34 @@
+# (Sun Nov 08 2026)
+
+#### 🐛 Bug Fix
+
+- Merge next into main [#43](https://github.com/Grsmto/scroll-snap-carousel/pull/43) ([@Grsmto](https://github.com/Grsmto) [@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- `@snap-carousel/core@0.0.20`, `@snap-carousel/react@0.0.22`
+  - feat(core): expose continuous scroll progress between snaps [#42](https://github.com/Grsmto/scroll-snap-carousel/pull/42) ([@Grsmto](https://github.com/Grsmto))
+
+#### ⚠️ Pushed to `main`
+
+- update auto ([@Grsmto](https://github.com/Grsmto))
+- add nvmrc + eslintrc ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/docs@0.0.2`, `@snap-carousel/svelte@0.0.20`
+  - fix: keep the Svelte package buildable and the docs site building ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/docs@0.0.2`
+  - rename package ([@Grsmto](https://github.com/Grsmto))
+  - add example docs website ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/core@0.0.20`, `@snap-carousel/react@0.0.22`
+  - remove test setup until we have tests ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/core@0.0.20`
+  - fix(core): fix observer being cleaned up before triggering ([@Grsmto](https://github.com/Grsmto))
+- `@snap-carousel/react@0.0.22`
+  - chore(react): upgrade storybook ([@Grsmto](https://github.com/Grsmto))
+
+#### Authors: 2
+
+- Adrien ([@adrien-denat-qatalog](https://github.com/adrien-denat-qatalog))
+- Adrien Denat ([@Grsmto](https://github.com/Grsmto))
+
+---
+
 # (Mon Dec 16 2024)
 
 #### ⚠️ Pushed to `main`
