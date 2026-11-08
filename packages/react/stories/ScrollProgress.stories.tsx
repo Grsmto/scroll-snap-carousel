@@ -48,7 +48,6 @@ const TabsCarousel = () => {
       </SnapCarousel>
       <div
         ref={tabsRef}
-        role="tablist"
         style={{
           position: 'relative',
           display: 'grid',
@@ -68,9 +67,8 @@ const TabsCarousel = () => {
         {tabs.map((tab, index) => (
           <button
             key={tab}
-            role="tab"
             type="button"
-            aria-selected={state.index === index}
+            aria-current={state.index === index ? true : undefined}
             onClick={() => scrollTo(index)}
             style={{ position: 'relative', background: 'none', border: 0 }}
           >

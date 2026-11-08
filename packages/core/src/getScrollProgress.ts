@@ -1,15 +1,10 @@
-import { debounceHOF, getElementPositionX } from './utils';
+import { getSnapTargetX } from './scrollTo';
+import { debounceHOF } from './utils';
 
-export const getSnapPositionsX = (root: HTMLElement): number[] => {
-  const maxScroll = root.scrollWidth - root.clientWidth;
-
-  return Array.from(root.children).map((element) =>
-    Math.min(
-      Math.max(0, getElementPositionX(root, element as HTMLElement)),
-      maxScroll
-    )
+export const getSnapPositionsX = (root: HTMLElement): number[] =>
+  Array.from(root.children).map((element) =>
+    getSnapTargetX(root, element as HTMLElement)
   );
-};
 
 export const getScrollProgress = (
   scrollLeft: number,
@@ -43,8 +38,10 @@ export const observeScrollProgress = ({
 }) => {
   let positions = getSnapPositionsX(root);
   let frame: number | null = null;
+  let disposed = false;
 
   const update = () => {
+    if (frame !== null) cancelAnimationFrame(frame);
     frame = null;
     onProgress(getScrollProgress(root.scrollLeft, positions));
   };
@@ -54,18 +51,28 @@ export const observeScrollProgress = ({
   };
 
   const onResize = debounceHOF(() => {
+    if (disposed) return;
     positions = getSnapPositionsX(root);
     update();
   }, 100);
 
   root.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
+
+  const resizeObserver = new ResizeObserver(onResize);
+
+  resizeObserver.observe(root);
+  Array.from(root.children).forEach((slide) => {
+    resizeObserver.observe(slide);
+  });
   update();
 
   const destroy = () => {
+    disposed = true;
     if (frame !== null) cancelAnimationFrame(frame);
     root.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', onResize);
+    resizeObserver.disconnect();
   };
 
   return { destroy };
